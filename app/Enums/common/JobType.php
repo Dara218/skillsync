@@ -10,20 +10,20 @@ enum JobType: string
     /**
      * Full Time job type.
      */
-    case FULL_TIME = 'full_time';
+    case FULL_TIME = 'FULL_TIME';
 
     /**
      * Part time job type.
      */
-    case PART_TIME = 'part_time';
+    case PART_TIME = 'PART_TIME';
 
     /**
      * Remote job type.
      */
-    case REMOTE = 'remote';
+    case REMOTE = 'REMOTE';
 
     /**
      * Internship job type.
      */
-    case INTERNSHIP = 'internship';
+    case INTERNSHIP = 'INTERNSHIP';
 }
