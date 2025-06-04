@@ -9,8 +9,14 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/scss/admin.scss',
                 'resources/scss/user.scss',
+                'resources/js/components/disableButtonSubmit.js',
             ],
             refresh: true,
         }),
     ],
+    resolve: {
+        alias: {
+            '$': 'jQuery'
+        },
+    },
 });
