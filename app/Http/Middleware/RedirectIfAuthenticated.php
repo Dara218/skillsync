@@ -18,18 +18,11 @@ class RedirectIfAuthenticated
     public function handle(Request $request, Closure $next, string $guard): Response
     {
         if (Auth::guard($guard)->check()) {
-            $route = null;
-
-            switch ($guard) {
-                case UserGuard::ADMIN->value:
-                    // Todo: Update this
-                    $route = route('test');
-                    break;
-                case UserGuard::USER->value:
-                default:
-                    $route = route('user.dashboard');
-                    break;
-            }
+            $route = match ($guard) {
+                UserGuard::ADMIN->value => route('test'), // Todo: Change this
+                UserGuard::USER->value => $route = route('user.dashboard'),
+                default => $route = route('user.dashboard'),
+            };
 
             return redirect($route);
         }

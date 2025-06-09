@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('user_role', array_map(fn($role) => $role->value, UserRole::cases()));
+            $table->enum('user_role', UserRole::list());
             $table->string('resume_path')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();

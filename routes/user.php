@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Registration\UserRegistrationController;
 use App\Http\Controllers\User\{
     Authentication\AuthUserController,
     Dashboard\UserDashboardController,
 };
+use App\Http\Controllers\User\VerifyEmail\UserVerifyController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('user.')->group(function () {
@@ -18,6 +20,15 @@ Route::name('user.')->group(function () {
                     Route::get('/', 'index')->name('index');
                     Route::post('/', 'authenticate')->name('authenticate');
             });
+
+            // User Registration Routes
+            Route::controller(UserRegistrationController::class)
+                ->prefix('/register')
+                ->name('register.')
+                ->group(function () {
+                    Route::get('/', 'index')->name('index');
+                    Route::post('/', 'store')->name('store');
+                });
         });
 
         // Auth user routes
@@ -35,5 +46,12 @@ Route::name('user.')->group(function () {
     Route::middleware('user')->group(function () {
         // Dashboard Route
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+        // User Verification Route
+        Route::controller(UserVerifyController::class)
+            ->prefix('user-verify')
+            ->name('verify.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+            });
     });
 });

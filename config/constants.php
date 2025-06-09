@@ -16,4 +16,9 @@
 */
 return [
     'default_seeder_count' => 10,
+    'validation' => [
+        'default_max_chars' => 30,
+        'max_email_address_chars' => 40,
+    ],
+    'user_register_code_length' => 6,
 ];

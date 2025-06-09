@@ -26,4 +26,14 @@ enum JobType: string
      * Internship job type.
      */
     case INTERNSHIP = 'INTERNSHIP';
+
+    /**
+     * Get the list of all enum values.
+     *
+     * @return array<mixed, string>
+     */
+    public static function list(): array
+    {
+        return array_map(fn(self $enum) => $enum->value, JobType::cases());
+    }
 }

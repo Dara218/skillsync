@@ -5,7 +5,10 @@ namespace App\Http\Controllers\User\Authentication;
 use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserLoginRequest;
-use App\Service\Common\LogoutService;
+use App\Service\Common\{
+    LogoutService,
+    LogService,
+};
 use App\Service\User\Authentication\AuthUserService;
 use Illuminate\Http\{
     RedirectResponse,
@@ -76,7 +79,13 @@ class AuthUserController extends Controller
                 ->route('user.dashboard')
                 ->with('sucess', 'Success!');
         } catch (\Exception $e) {
-            // Todo: Create a log error.
+            LogService::error(
+                'Error processing user authentication.',
+                [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ],
+            );
 
             return back()->withInput(['email']);
         }
@@ -97,9 +106,15 @@ class AuthUserController extends Controller
             $this->logoutService->handleLogout($request, $guard);
 
             return redirect()->route('user.login.index');
-        } catch (\Throwable $th) {
-            // Todo: Create a log error.
-            // Todo: Finish this: Add flash message
+        } catch (\Exception $e) {
+            LogService::error(
+                'Error processing user logout.',
+                [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ],
+            );
+
             return redirect()
                 ->route('user.login.index')
                 ->with('Error', 'Theres a problem.');

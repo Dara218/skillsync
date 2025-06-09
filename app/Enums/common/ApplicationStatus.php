@@ -26,4 +26,14 @@ enum ApplicationStatus: string
      * Rejected application type.
      */
     case REJECTED = 'REJECTED';
+
+    /**
+     * Get the list of all enum values.
+     *
+     * @return array<mixed, string>
+     */
+    public static function list(): array
+    {
+        return array_map(fn(self $enum) => $enum->value, ApplicationStatus::cases());
+    }
 }

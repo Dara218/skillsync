@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('job_id');
             $table->text('cover_letter')->nullable();
-            $table->enum('status', array_map(fn($status) => $status->value, ApplicationStatus::cases()));
+            $table->enum('status', ApplicationStatus::list());
             $table->timestamps();
 
             // Indexes
