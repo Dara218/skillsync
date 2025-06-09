@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('company_id');
             $table->string('title');
             $table->string('location');
-            $table->enum('type', array_map(fn($type) => $type->value, JobType::cases()));
+            $table->enum('type', JobType::list());
             $table->string('salary_range')->nullable();
             $table->text('description');
             $table->boolean('is_published');
