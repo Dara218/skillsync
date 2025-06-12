@@ -62,7 +62,9 @@ class UserRegistrationController extends Controller
             $this->userRegisterService
                 ->handleRegistration($request->validated());
 
-            $this->authUserService->handleLogin($request->only('email', 'password'));
+            $this->authUserService->handleLogin(
+                $request->only('email', 'password')
+            );
 
             return redirect()
                 ->route('user.verify.index')

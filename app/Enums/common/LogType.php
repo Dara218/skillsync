@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Enums\Common;
+namespace App\Enums\common;
 
 /**
  * Enumeration for Logging Type

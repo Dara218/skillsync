@@ -1,12 +1,18 @@
 <x-mail::message>
-# Registration Successful.
+# Registration Successful
 
-Thank you for registering with Skill Sync! You can now verify your email by clicking the email below.
+Hi {{ $name }},
 
-<x-mail::button :url="route('user.dashboard')">
-Verify Email.
-</x-mail::button>
+Thank you for joining Skill Sync!
 
-Thanks,<br>
+To verify your account, please enter the following code:
+
+**{{ $code }}**
+
+This code is confidential—please do not share it with anyone.
+
+If you didn’t create an account, feel free to ignore this message.
+
+Sincerely,  
 {{ config('app.name') }}
 </x-mail::message>

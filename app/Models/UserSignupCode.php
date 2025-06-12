@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserLoginCode extends Model
+class UserSignupCode extends Model
 {
     use HasFactory;
 
@@ -14,12 +14,22 @@ class UserLoginCode extends Model
      *
      * @var string
      */
-    protected $table = 'user_login_code';
+    protected $table = 'user_signup_code';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'email',
+        'code',
+    ];
 
     /**
      * Get the associated user for the user code.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, UserLoginCode>
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<User, UserSignupCode>
      */
     public function user()
     {

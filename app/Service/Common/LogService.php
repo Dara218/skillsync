@@ -2,7 +2,7 @@
 
 namespace App\Service\Common;
 
-use App\Enums\Common\LogType;
+use App\Enums\common\LogType;
 use Illuminate\Support\Facades\Log;
 
 class LogService

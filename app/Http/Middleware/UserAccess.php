@@ -27,15 +27,24 @@ class UserAccess
         $guard = Auth::guard(UserGuard::USER->value);
         $isVerified = $guard->user()?->email_verified_at;
         $routename = $request->route()?->getName();
+
         $isNotLoggingOut = $routename !== 'user.logout';
+        $isVerifying = $routename !== 'user.verify.process';
 
         if ($guard->check()) {
             // If the unverified user is trying to access anything except the verify page
-            if (!$isVerified && ($routename !== self::VERIFY_ROUTE && $isNotLoggingOut)) {
+            if (
+                !$isVerified
+                && (
+                    $routename !== self::VERIFY_ROUTE
+                    && $isNotLoggingOut
+                    && $isVerifying
+                )
+            ) {
                 return redirect()->route(self::VERIFY_ROUTE);
             }
 
-            // If the verified user tried to access the verify user page
+            // If the verified user tries to access the verify user page
             if ($isVerified && $routename === self::VERIFY_ROUTE) {
                 return redirect()->route('user.dashboard');
             }

@@ -19,6 +19,7 @@ return [
     'validation' => [
         'default_max_chars' => 30,
         'max_email_address_chars' => 40,
+        'min_password_chars' => 8,
     ],
     'user_register_code_length' => 6,
 ];
