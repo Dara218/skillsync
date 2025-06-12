@@ -18,7 +18,7 @@ interface UserRegisterCodeInterface extends BaseInterface
     public function getByCode(string $code): UserSignupCode;
 
     /**
-     * Summary of getLatest
+     * Get the latest data from the database.
      *
      * @return \App\Models\UserSignupCode
      */
