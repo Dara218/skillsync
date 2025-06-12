@@ -5,6 +5,7 @@ namespace App\Http\Requests\User;
 use App\Enums\common\UserRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class UserRegisterRequest extends FormRequest
 {
@@ -37,9 +38,11 @@ class UserRegisterRequest extends FormRequest
             ],
             'password' => [
                 'required',
-                'string',
-                'min:8',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])(?!.*\s).+$/',
+                Password::min(config('constants.validation.min_password_chars'))
+                    ->letters()
+                    ->mixedCase()
+                    ->numbers()
+                    ->symbols(),
             ],
             'role' => [
                 'required',

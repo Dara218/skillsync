@@ -72,12 +72,11 @@ class AuthUserController extends Controller
             if (!$isSuccessLogin) {
                 return back()
                     ->withInput()
-                    ->withErrors(['error' => 'Invalid Credentials.']);
+                    ->withErrors(['error' => __('validation.custom.invalid_credentials')]);
             }
 
             return redirect()
-                ->route('user.dashboard')
-                ->with('sucess', 'Success!');
+                ->route('user.dashboard');
         } catch (\Exception $e) {
             LogService::error(
                 'Error processing user authentication.',
@@ -117,7 +116,7 @@ class AuthUserController extends Controller
 
             return redirect()
                 ->route('user.login.index')
-                ->with('Error', 'Theres a problem.');
+                ->with('error', __('message.error.failed_handling_the_process'));
         }
     }
 }

@@ -13,9 +13,11 @@ return [
 
     'success' => [
         'successful_email_registration' => 'Successful email registration. Please check your email address to verify.',
+        'your_account_has_been_verified' => 'Your account has been verified.',
     ],
 
     'error' => [
         'failed_handling_the_process' => 'Failed to process. Please contact the system administrator.',
+        'verification_expired_sent_a_new_one' => "Your verification code has expired. We've sent a new one—please check your email.",
     ],
 ];

@@ -23,13 +23,22 @@ class UserRegister extends Mailable
     protected array $data;
 
     /**
+     * The user login code (user_login_code.code)
+     *
+     * @var array
+     */
+    protected string $code;
+
+    /**
      * Create a new message instance.
      *
      * @param array<mixed, string> $data
+     * @param string $code (user_login_code.code)
      */
-    public function __construct(array $data)
+    public function __construct(array $data, string $code)
     {
         $this->data = $data;
+        $this->code = $code;
     }
 
     /**
@@ -38,7 +47,7 @@ class UserRegister extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Signup',
+            subject: __('mail.email_verification.subject', ['page' => 'Signup']),
         );
     }
 
@@ -49,7 +58,7 @@ class UserRegister extends Mailable
     {
         return new Content(
             markdown: 'mail.user-register',
-            with: $this->data,
+            with: array_merge($this->data, ['code' => $this->code]),
         );
     }
 

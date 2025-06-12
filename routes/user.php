@@ -52,6 +52,7 @@ Route::name('user.')->group(function () {
             ->name('verify.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
+                Route::post('/', 'verify')->name('process');
             });
     });
 });

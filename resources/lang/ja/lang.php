@@ -3,15 +3,15 @@
 return [
     'enums' => [
         'user_role' => [
-            'job_seeker' => '求职者',
-            'admin' => '管理员',
+            'job_seeker' => '求職者',
+            'admin' => '管理者',
         ],
     ],
 
     'label' => [
-        'email' => '电子邮件',
+        'email' => 'メールアドレス',
         'password' => 'パスワード',
-        'not_a_member' => '不是会员？',
+        'not_a_member' => '会員ではありませんか？',
         'full_name' => '氏名',
         'role' => '役割',
         'user_login' => 'ユーザーログイン',
@@ -19,7 +19,7 @@ return [
     ],
 
     'button' => [
-        'login' => '登录',
+        'login' => 'ログイン',
         'register' => '登録',
     ],
 

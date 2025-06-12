@@ -55,13 +55,14 @@ class UserRegisterService
         try {
             $user = $this->userInterface->create($data);
 
+            // Generate user code for email verification
+            $userCode = $this->generateRegisterCode($user->email);
+
             // Send registration email
             Mail::to($user->email)->send(new UserRegister(
-                $user->only('email', 'name')
+                $user->only('email', 'name'),
+                $userCode,
             ));
-
-            // Generate user code for email verification
-            $this->generateRegisterCode($user->email);
 
             Db::commit();
         } catch (\Exception $e) {
@@ -82,9 +83,9 @@ class UserRegisterService
      *
      * @param string $email (users.code)
      *
-     * @return void
+     * @return mixed
      */
-    public function generateRegisterCode(string $email): void
+    public function generateRegisterCode(string $email)
     {
         try {
             $data = [
@@ -93,6 +94,8 @@ class UserRegisterService
             ];
 
             $this->userCodeInterface->create($data);
+
+            return $data['code'];
         } catch (\Exception $e) {
             LogService::error(
                 'Error generating register code.',

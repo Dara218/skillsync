@@ -61,10 +61,10 @@ class User extends Authenticatable
     /**
      * Get the associated user codes for the user.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<UserLoginCode, User>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<UserSignUpCode, User>
      */
-    public function userLoginCodes()
+    public function userSignupCodes()
     {
-        return $this->hasMany(UserLoginCode::class);
+        return $this->hasMany(UserSignupCode::class);
     }
 }
