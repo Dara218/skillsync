@@ -1,58 +1,86 @@
 @extends('layout.user.guest')
 
-@section('title', __('lang.title.user_registration'))
+@section('title', __('lang.title.signup'))
 
 @section('content')
-  <div>
-    <form action="{{ route('user.register.store') }}" method="POST" id="form">
+  <div class="card">
+    <h1 class="title">{{ __('lang.title.signup') }}</h1>
+    <form action="{{ route('user.register.store') }}" method="POST" id="form" class="form">
       @csrf
-      <h1>{{ __('lang.label.user_registration') }}</h1>
-
+      {{-- Name --}}
       <div>
-        <label for="name" class="label">{{ __('lang.label.full_name') }}</label>
-        <input type="text" name="name" id="name" class="input" value="{{ old('name') }}">
+        <label for="name" class="label">
+          {{ __('lang.label.full_name') }}
+        </label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="input"
+          value="{{ old('name') }}"
+        >
         @error('name')
-          <p>{{ $message }}</p>
+          <p class="error">{{ $message }}</p>
         @enderror
       </div>
 
+      {{-- Email --}}
       <div>
-        <label for="email" class="label">{{ __('lang.label.email') }}</label>
-        <input type="text" name="email" id="email" class="input" value="{{ old('email') }}">
+        <label for="email" class="label">
+          {{ __('lang.label.email') }}
+        </label>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          class="input"
+          value="{{ old('email') }}"
+        >
         @error('email')
-          <p>{{ $message }}</p>
+          <p class="error">{{ $message }}</p>
         @enderror
       </div>
 
+      {{-- Password --}}
       <div>
-        <label for="password" class="label">{{ __('lang.label.password') }}</label>
+        <label for="password" class="label">
+          {{ __('lang.label.password') }}
+        </label>
         <input type="password" name="password" id="password" class="input">
         @error('password')
-          <p>{{ $message }}</p>
+          <p class="error mb-2">{{ $message }}</p>
         @enderror
-        <ul>
-          <li>Is at least 8 characters long (or more, e.g., 12)</li>
-          <li>Includes uppercase letters</li>
-          <li>Includes lowercase letters</li>
-          <li>Includes numbers</li>
-          <li>Includes symbols</li>
-          <li>Does not contain whitespace</li>
+        <ul class="list__container">
+          <li class="list">{{ __('lang.note.password.8_min_chars') }}</li>
+          <li class="list">{{ __('lang.note.password.uppercase') }}</li>
+          <li class="list">{{ __('lang.note.password.lowercase') }}</li>
+          <li class="list">{{ __('lang.note.password.numbers') }}</li>
+          <li class="list">{{ __('lang.note.password.symbols') }}</li>
         </ul>
       </div>
 
       <div>
         <label for="role" class="label">{{ __('lang.label.role') }}</label>
-        <select name="role" id="role">
+        <select name="role" id="role" class="input__selectbox">
           @foreach (App\Enums\common\UserRole::cases() as $role)
             <option value="{{ $role }}">{{ $role->toJapanese() }}</option>
           @endforeach
         </select>
         @error('role')
-          <p>{{ $message }}</p>
+          <p class="error">{{ $message }}</p>
         @enderror
       </div>
 
-      <button type="submit" class="button__submit" id="submitBtn">{{ __('lang.button.register') }}</button>
+      <button type="submit" class="button__submit" id="submitBtn">
+        {{ __('lang.button.register') }}
+      </button>
+      
+      <p class="label__link-wrapper">
+        {{ __('lang.label.already_a_member') }}
+        <a href="{{ route('user.login.index') }}" class="link">
+          {{ __('lang.link.login_here') }}
+        </a>
+      </p>
     </form>
   </div>
 

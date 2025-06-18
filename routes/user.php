@@ -5,7 +5,10 @@ use App\Http\Controllers\User\{
     Authentication\AuthUserController,
     Dashboard\UserDashboardController,
 };
-use App\Http\Controllers\User\VerifyEmail\UserVerifyController;
+use App\Http\Controllers\User\{
+    Dashboard\ResumeController,
+    VerifyEmail\UserVerifyController,
+};
 use Illuminate\Support\Facades\Route;
 
 Route::name('user.')->group(function () {
@@ -53,6 +56,14 @@ Route::name('user.')->group(function () {
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'verify')->name('process');
+            });
+        // Resume Route
+        Route::controller(ResumeController::class)
+            ->prefix('resume')
+            ->name('resume.')
+            ->group(function() {
+                Route::put('/upload', 'upload')->name('upload');
+                Route::put('/delete', 'delete')->name('delete');
             });
     });
 });

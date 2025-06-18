@@ -1,7 +1,16 @@
 @use './tailwindcss/tailwind.scss';
 
+// Elements
+@use './elements/user.scss';
+
 // Component
 @use './component/text.scss';
 @use './component/button.scss';
 @use './component//input.scss';
 @use './component/label.scss';
+@use './component/card.scss';
+@use './component/title.scss';
+@use './component//form.scss';
+@use './component/error.scss';
+@use './component/link.scss';
+@use './component/list.scss';

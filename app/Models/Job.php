@@ -16,4 +16,14 @@ class Job extends Model
      * @var string
      */
     protected $table = 'jobs';
+
+    /**
+     * Get the associated company codes for the job.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Company, Job>
+     */
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
+    }
 }

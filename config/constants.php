@@ -22,4 +22,9 @@ return [
         'min_password_chars' => 8,
     ],
     'user_register_code_length' => 6,
+    'suggested_company_count' => 5,
+    'recent_user_application_count' => 5,
+    'file_path' => [
+        'resume' => 'user/resume/',
+    ],
 ];

@@ -59,6 +59,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the resume file name from the resume path.
+     *
+     * @return string
+     */
+    public function getResumeFileNameAttribute(): string
+    {
+        return basename($this->resume_path);
+    }
+
+    /**
      * Get the associated user codes for the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<UserSignUpCode, User>

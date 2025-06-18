@@ -28,6 +28,21 @@ enum ApplicationStatus: string
     case REJECTED = 'REJECTED';
 
     /**
+     * Get the corresponding Japanese name for each enum case.
+     *
+     * @return string
+     */
+    public function toJapanese(): string
+    {
+        return match ($this) {
+            self::PENDING => __('lang.enums.application_status.pending'),
+            self::REVIEWED => __('lang.enums.application_status.reviewed'),
+            self::ACCEPTED => __('lang.enums.application_status.accepted'),
+            self::REJECTED => __('lang.enums.application_status.rejected'),
+        };
+    }
+
+    /**
      * Get the list of all enum values.
      *
      * @return array<mixed, string>

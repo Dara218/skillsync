@@ -126,7 +126,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
-
+        
+        's3' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/s3.log'),
+            'level' => env('LOG_LEVEL', 'critical'),
+        ],
     ],
 
 ];

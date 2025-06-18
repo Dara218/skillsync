@@ -1,0 +1,11 @@
+.title {
+    @apply text-2xl font-bold text-center text-gray-800 mb-6;
+
+    &__dashboard {
+        @apply bg-white rounded-md shadow p-4 text-center;
+    }
+
+    &__md {
+        @apply text-lg font-semibold;
+    }
+}

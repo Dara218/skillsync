@@ -12,7 +12,7 @@
   @vite('resources/scss/user.scss')
 </head>
 <body>
-  <main>
+  <main class="container">
     @yield('content')
   </main>
 

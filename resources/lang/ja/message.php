@@ -14,6 +14,8 @@ return [
     'success' => [
         'successful_email_registration' => 'メール登録が成功しました。確認のため、メールアドレスをチェックしてください。',
         'your_account_has_been_verified' => 'アカウントが認証されました。',
+        'resume_uploaded_successfully' => '履歴書は正常にアップロードされました。',
+        'resume_deleted_successfully' => '履歴書は正常に削除された。',
     ],
 
     'error' => [

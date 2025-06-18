@@ -87,6 +87,8 @@ class UserVerificationService
                 $this->updateEmailVerifiedAt();
             };
 
+            // Todo: Add re-send verification code feature.
+
             DB::commit();
 
             return $isCodeValid;

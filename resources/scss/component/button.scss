@@ -1,10 +1,22 @@
 .button {
     &__submit {
-        @apply w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+        @apply w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition;
     }
     
     &:disabled,
     &--disabled {
         @apply pointer-events-none opacity-50;
+    }
+    
+    &__disabled-light {
+        @apply text-sm px-3 py-1 border border-gray-300 rounded bg-gray-100 w-24 text-center;
+    }
+
+    &__light {
+        @apply text-sm px-3 py-1 border border-gray-300 rounded hover:bg-gray-100 text-center;
+    }
+
+    &__lg {
+        @apply text-center px-4 py-3 border border-gray-300 rounded hover:bg-gray-50;
     }
 }
