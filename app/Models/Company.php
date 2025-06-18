@@ -16,4 +16,14 @@ class Company extends Model
      * @var string
      */
     protected $table = 'companies';
+
+    /**
+     * Get the associated jobs for the company.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Job, Company>
+     */
+    public function jobs()
+    {
+        return $this->hasMany(Job::class);
+    }
 }

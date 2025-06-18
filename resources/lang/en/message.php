@@ -14,6 +14,8 @@ return [
     'success' => [
         'successful_email_registration' => 'Successful email registration. Please check your email address to verify.',
         'your_account_has_been_verified' => 'Your account has been verified.',
+        'resume_uploaded_successfully' => 'Resume uploaded successfully.',
+        'resume_deleted_successfully' => 'Resume deleted succssfully.',
     ],
 
     'error' => [

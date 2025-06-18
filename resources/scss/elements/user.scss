@@ -1,0 +1,19 @@
+.container {
+    @apply min-h-screen flex items-center justify-center bg-gray-100 px-4 py-12 min-w-full;
+
+    &__dashboard {
+        @apply w-full md:max-w-5xl mx-auto space-y-6 md:px-4;
+        
+        &__botton-nav {
+            @apply col-span-2 grid grid-cols-1 md:grid-cols-3 gap-3;
+        }
+    }
+}
+
+.check-container {
+    @apply w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs;
+}
+
+.ballot-container {
+    @apply w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white text-xs;
+}
