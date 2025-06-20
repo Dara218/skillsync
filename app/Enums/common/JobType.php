@@ -36,4 +36,19 @@ enum JobType: string
     {
         return array_map(fn(self $enum) => $enum->value, JobType::cases());
     }
+
+    /**
+     * Get the corresponding Japanese name for each enum case.
+     *
+     * @return string
+     */
+    public function toJapanese(): string
+    {
+        return match ($this) {
+            self::FULL_TIME => __('lang.enums.job_type.full_time'),
+            self::PART_TIME => __('lang.enums.job_type.part_time'),
+            self::REMOTE => __('lang.enums.job_type.remote_time'),
+            self::INTERNSHIP => __('lang.enums.job_type.internship'),
+        };
+    }
 }

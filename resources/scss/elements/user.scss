@@ -8,6 +8,18 @@
             @apply col-span-2 grid grid-cols-1 md:grid-cols-3 gap-3;
         }
     }
+
+    &__jobs {
+        @apply container__dashboard mx-auto px-4 py-6;
+    }
+
+    &__search {
+        @apply bg-white p-4 rounded shadow mb-6 flex flex-col sm:flex-row gap-2 sm:gap-4 items-center;
+    }
+
+    &__job-list {
+        @apply bg-white p-4 rounded shadow mb-4 flex flex-col sm:flex-row sm:items-center gap-4;
+    }
 }
 
 .check-container {

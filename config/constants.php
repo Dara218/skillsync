@@ -27,4 +27,7 @@ return [
     'file_path' => [
         'resume' => 'user/resume/',
     ],
+    'pagination' => [
+        'jobs' => 10,
+    ],
 ];

@@ -7,6 +7,7 @@ use App\Interfaces\Job\JobInterface;
 use App\Models\Job;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobRepository extends BaseRepository implements JobInterface
 {
@@ -29,9 +30,23 @@ class JobRepository extends BaseRepository implements JobInterface
     {
         return $this->model
             ->where('is_published', JobPublishTag::PUBLISHED->value)
-            ->latest()
             ->with('company')
             ->take(config('constants.suggested_company_count'))
+            ->inRandomOrder()
             ->get();
+    }
+
+    /**
+     * Get the jobs data.
+     *
+     * @return \Illuminate\Pagination\LengthAwarePaginator
+     */
+    public function get(): LengthAwarePaginator
+    {
+        $jobCount = config('constants.pagination.jobs');
+
+        return $this->model
+            ->with('company')
+            ->paginate($jobCount);
     }
 }

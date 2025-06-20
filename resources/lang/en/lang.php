@@ -12,6 +12,12 @@ return [
             'accepted' => 'Accepted',
             'rejected' => 'Rejected',
         ],
+        'job_type' => [
+            'full_time' => 'Full Time',
+            'part_time' => 'Part Time',
+            'remote_time' => 'Remote Time',
+            'internship'=> 'Internship',
+        ],
     ],
 
     'label' => [
@@ -29,6 +35,8 @@ return [
         'resume_uploaded' => 'Resume uploaded',
         'date_applied' => 'Date Applied',
         'no_uploaded_resume' => 'No uploaded resume',
+        'no_info' => 'No info.',
+        'no_description' => 'No description.',
     ],
 
     'button' => [
@@ -43,11 +51,18 @@ return [
         'my_applications' => 'My Applications',
         'delete' => 'Delete',
         'upload' => 'Upload',
+        'view' => 'View',
+        'search' => 'Search',
     ],
 
     'link' => [
         'become_a_member' => 'Become a member',
         'login_here' => 'Login here',
+        'browse_all_jobs' => 'Browse All Jobs',
+        'update_profile' => 'Update Profile',
+        'my_applications' => 'My Applications',
+        'dashboard' => 'Dashboard',
+        'logout' => 'Logout',
     ],
 
     'title' => [
@@ -55,6 +70,7 @@ return [
         'user_login' => 'Login',
         'user_verify' => 'Account Verification',
         'dashboard' => 'Dashboard',
+        'jobs' => 'Jobs',
     ],
 
     'note' => [
@@ -67,5 +83,9 @@ return [
         ],
         'enter_6_digit_verification_code' => 'Enter a 6 digit verification code sent to your registered email address.',
         'dashboard_welcome' => 'Welcome back, :name! Ready to find your next opportunity?',
+    ],
+
+    'placeholder' => [
+        'search_for_jobs' => 'Search for jobs...',
     ],
 ];
