@@ -9,6 +9,7 @@ use App\Http\Controllers\User\{
     Dashboard\ResumeController,
     VerifyEmail\UserVerifyController,
 };
+use App\Http\Controllers\User\Job\JobsController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('user.')->group(function () {
@@ -49,6 +50,7 @@ Route::name('user.')->group(function () {
     Route::middleware('user')->group(function () {
         // Dashboard Route
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+
         // User Verification Route
         Route::controller(UserVerifyController::class)
             ->prefix('user-verify')
@@ -57,6 +59,7 @@ Route::name('user.')->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'verify')->name('process');
             });
+
         // Resume Route
         Route::controller(ResumeController::class)
             ->prefix('resume')
@@ -64,6 +67,14 @@ Route::name('user.')->group(function () {
             ->group(function() {
                 Route::put('/upload', 'upload')->name('upload');
                 Route::put('/delete', 'delete')->name('delete');
+            });
+
+        // Jobs Routes
+        Route::controller(JobsController::class)
+            ->name('jobs.')
+            ->prefix('/jobs')
+            ->group(function() {
+                Route::get('/', 'index')->name('index');
             });
     });
 });

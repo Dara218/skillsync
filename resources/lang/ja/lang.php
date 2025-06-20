@@ -12,6 +12,12 @@ return [
             'accepted' => '了承済み',
             'rejected' => '却下',
         ],
+        'job_type' => [
+            'full_time' => 'フルタイム',
+            'part_time' => 'パートタイム',
+            'remote_time' => 'リモートタイム',
+            'internship'=> 'インターンシップ',
+        ],
     ],
 
     'label' => [
@@ -29,6 +35,8 @@ return [
         'resume_uploaded' => 'アップロードされた履歴書',
         'date_applied' => '申請日',
         'no_uploaded_resume' => '履歴書がアップロードされていない',
+        'no_info' => '情報はない。',
+        'no_description' => '記述がない。',
     ],
 
     'button' => [
@@ -43,11 +51,18 @@ return [
         'my_applications' => '私のアプリケーション',
         'delete' => '削除',
         'upload' => 'アップロード',
+        'view' => 'ビュー',
+        'search' => '探索',
     ],
 
     'link' => [
         'become_a_member' => '会員になる',
         'login_here' => 'ログインはこちら',
+        'browse_all_jobs' => 'すべての求人を見る',
+        'update_profile' => 'プロフィール更新',
+        'my_applications' => '私のアプリケーション',
+        'dashboard' => 'ダッシュボード',
+        'logout' => 'ログアウト',
     ],
 
     'title' => [
@@ -55,6 +70,7 @@ return [
         'user_login' => 'ログイン',
         'user_verify' => 'ユーザー検証',
         'dashboard' => 'ダッシュボード',
+        'jobs' => '求人',
     ],
 
     'note' => [
@@ -67,5 +83,9 @@ return [
         ],
         'enter_6_digit_verification_code' => 'ご登録のEメールアドレスに送信される6桁の認証コードを入力してください。',
         'dashboard_welcome' => 'おかえりなさい、:name！次のチャンスを見つける準備はできましたか？',
+    ],
+
+    'placeholder' => [
+        'search_for_jobs' => '求人検索...',
     ],
 ];

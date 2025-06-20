@@ -75,8 +75,7 @@ class AuthUserController extends Controller
                     ->withErrors(['error' => __('validation.custom.invalid_credentials')]);
             }
 
-            return redirect()
-                ->route('user.dashboard');
+            return redirect()->route('user.dashboard');
         } catch (\Exception $e) {
             LogService::error(
                 'Error processing user authentication.',

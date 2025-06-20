@@ -9,9 +9,14 @@
     @yield('title', 'Default Auth Title')
   </title>
 
+  {{-- Font Awesome CDN --}}
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.0/css/all.css" crossorigin="anonymous">
+
   @vite('resources/scss/user.scss')
 </head>
 <body>
+  @include('components.nav-bar')
+
   <main class="container">
     @yield('content')
   </main>

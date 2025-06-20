@@ -12,7 +12,13 @@
         <label for="email" class="label">
           {{ __('lang.label.email') }}
         </label>
-        <input type="text" name="email" id="email" class="input" value="{{ old('email') }}">
+        <input
+          type="text"
+          name="email"
+          id="email"
+          class="input"
+          value="{{ old('email') }}"
+        >
         @error('email')
           <p class="error">{{ $message }}</p>
         @enderror
@@ -23,7 +29,12 @@
         <label for="password" class="label">
           {{ __('lang.label.password') }}
         </label>
-        <input type="password" name="password" id="password" class="input">
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="input"
+        >
         @error('password')
           <p class="error">{{ $message }}</p>
         @enderror
