@@ -28,6 +28,7 @@ return [
         'resume' => 'user/resume/',
     ],
     'pagination' => [
+        'default' => 10,
         'jobs' => 10,
     ],
 ];

@@ -5,16 +5,18 @@
 @section('content')
   <div class="container__jobs">
     {{-- Search Bar --}}
-    <div class="container__search">
+    <form action="{{ route('user.jobs.index') }}" method="GET" class="container__search">
       <input
         type="text"
+        name="job"
         placeholder="{{ __('lang.placeholder.search_for_jobs') }}"
         class="input"
+        value="{{ $keyword ?? '' }}"
       />
-      <button class="button__light w-full sm:w-auto">
+      <button type="submit" class="button__light w-full sm:w-auto">
         {{ __('lang.button.search') }}
       </button>
-    </div>
+    </form>
 
     {{-- Job Listings --}}
     @forelse ($jobs as $job)
@@ -43,6 +45,8 @@
     @empty
       <p class="text-center">{{ __('lang.label.no_info') }}</p>
     @endforelse
+    
+    {{ $jobs->links('components.pagination') }}
   </div>
 
   @push('scripts')

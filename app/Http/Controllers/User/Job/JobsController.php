@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User\Job;
 use App\Http\Controllers\Controller;
 use App\Interfaces\Job\JobInterface;
 use App\Service\Common\LogService;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 
 class JobsController extends Controller
 {
@@ -29,16 +29,28 @@ class JobsController extends Controller
     /**
      * View user jobs page.
      *
-     * @param \Illuminate\Support\Facades\Request $request
+     * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|void
      */
     public function index(Request $request)
     {
         try {
-            $jobs = $this->jobInterface->get();
+            $keyword = $request->job;
+            $paginateCount = config('constants.pagination.jobs');
 
-            return view('user.jobs.index', compact('jobs'));
+            $jobs = $this->jobInterface->get($keyword, $paginateCount);
+            $lastPage = $jobs->lastPage();
+            $redirectRoute = 'user.jobs.index';
+
+            if ($redirect = redirectIfPageExceeds($request, $lastPage, $redirectRoute)) {
+                return $redirect;
+            };
+
+            return view('user.jobs.index', compact(
+                'jobs',
+                'keyword',
+            ));
         } catch (\Exception $e) {
             LogService::error(
                 'Error uploading the resume.',
