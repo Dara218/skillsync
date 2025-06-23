@@ -20,6 +20,10 @@
     &__job-list {
         @apply bg-white p-4 rounded shadow mb-4 flex flex-col sm:flex-row sm:items-center gap-4;
     }
+    
+    &__error-page {
+        @apply flex flex-col justify-center items-center bg-gray-100 text-center px-6;
+    }
 }
 
 .check-container {

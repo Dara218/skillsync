@@ -2,7 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\{
+    Facades,
+    ServiceProvider,
+};
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +24,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Facades\View::composer(['user.*', 'errors.*', 'admin.*'], function (View $view) {
+            $request = app(Request::class);
+
+            $errorRedirectRoute = route('user.dashboard');
+
+            // TODO: Set to admin route.
+            // if ($request->is('admin/*')) {
+            //     // $errorRedirectRoute = route('')
+            // }
+
+            $view->with(compact('errorRedirectRoute'));
+        });
     }
 }

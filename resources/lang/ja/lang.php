@@ -37,6 +37,7 @@ return [
         'no_uploaded_resume' => '履歴書がアップロードされていない',
         'no_info' => '情報はない。',
         'no_description' => '記述がない。',
+        'jobs' => '求人',
     ],
 
     'button' => [
@@ -53,6 +54,7 @@ return [
         'upload' => 'アップロード',
         'view' => 'ビュー',
         'search' => '探索',
+        'go_back' => '戻る',
     ],
 
     'link' => [
@@ -87,5 +89,48 @@ return [
 
     'placeholder' => [
         'search_for_jobs' => '求人検索...',
+    ],
+
+    'errors' => [
+        'not_found' => [
+            'title' => '見つからない。',
+            'message' => 'お探しのページは見つかりませんでした。',
+        ],
+        'bad_request' => [
+            'title' => 'リクエストが不正です。',
+            'message' => 'リクエストが不正なため、サーバーが処理できません。',
+        ],
+        'unauthorized' => [
+            'title' => '認証が必要です。',
+            'message' => 'このページにアクセスするには認証が必要です。',
+        ],
+        'forbidden' => [
+            'title' => 'アクセス拒否。',
+            'message' => 'このページへのアクセス権がありません。',
+        ],
+        'expired' => [
+            'title' => 'ページの有効期限が切れました。',
+            'message' => 'ページの有効期限が切れたため、再度試してください。',
+        ],
+        'too_many_request' => [
+            'title' => 'リクエストが多すぎます。',
+            'message' => 'リクエストが多すぎるため、一時的にアクセスが制限されています。',
+        ],
+        'internal_server_error' => [
+            'title' => '内部サーバーエラー。',
+            'message' => 'サーバー内部でエラーが発生しました。後でもう一度お試しください。',
+        ],
+        'bad_gateway' => [
+            'title' => '不正なゲートウェイ。',
+            'message' => 'ゲートウェイサーバーから不正な応答がありました。',
+        ],
+        'service_unavailable' => [
+            'title' => 'サービス利用不可。',
+            'message' => '現在、サービスを利用することができません。しばらくしてからもう一度お試しください。',
+        ],
+        'gateway_timeout' => [
+            'title' => 'ゲートウェイタイムアウト。',
+            'message' => 'ゲートウェイサーバーの応答がタイムアウトしました。',
+        ],
     ],
 ];
