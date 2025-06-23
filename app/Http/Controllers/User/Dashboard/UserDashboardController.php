@@ -45,6 +45,8 @@ class UserDashboardController extends Controller
      * View user dashboard page.
      *
      * @return \Illuminate\Contracts\View\View|void
+     *
+     * @throws \Exception
      */
     public function index()
     {
@@ -67,6 +69,8 @@ class UserDashboardController extends Controller
                     'trace' => $e->getTraceAsString(),
                 ],
             );
+
+            throw $e;
         }
     }
 }

@@ -32,6 +32,8 @@ class JobsController extends Controller
      * @param \Illuminate\Http\Request $request
      *
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|void
+     *
+     * @throws \Exception
      */
     public function index(Request $request)
     {
@@ -60,7 +62,7 @@ class JobsController extends Controller
                 ],
             );
 
-            // Todo: return 500 error page and apply to other pages.
+            throw $e;
         }
     }
 }

@@ -37,6 +37,7 @@ return [
         'no_uploaded_resume' => 'No uploaded resume',
         'no_info' => 'No info.',
         'no_description' => 'No description.',
+        'jobs' => 'Jobs',
     ],
 
     'button' => [
@@ -53,6 +54,7 @@ return [
         'upload' => 'Upload',
         'view' => 'View',
         'search' => 'Search',
+        'go_back' => 'Go Back',
     ],
 
     'link' => [
@@ -71,6 +73,7 @@ return [
         'user_verify' => 'Account Verification',
         'dashboard' => 'Dashboard',
         'jobs' => 'Jobs',
+        'error' => ':PAGE_TITLE',
     ],
 
     'note' => [
@@ -87,5 +90,48 @@ return [
 
     'placeholder' => [
         'search_for_jobs' => 'Search for jobs...',
+    ],
+
+    'errors' => [
+        'not_found' => [
+            'title' => 'Not found.',
+            'message' => 'The page you are looking for could not be found.',
+        ],
+        'bad_request' => [
+            'title' => 'Bad request.',
+            'message' => 'The server could not process the request due to invalid input.',
+        ],
+        'unauthorized' => [
+            'title' => 'Authentication required.',
+            'message' => 'You need to be authenticated to access this page.',
+        ],
+        'forbidden' => [
+            'title' => 'Access denied.',
+            'message' => 'You do not have permission to access this page.',
+        ],
+        'expired' => [
+            'title' => 'Page has expired.',
+            'message' => 'The page has expired. Please try again.',
+        ],
+        'too_many_request' => [
+            'title' => 'Too many requests.',
+            'message' => 'Access is temporarily restricted due to too many requests.',
+        ],
+        'internal_server_error' => [
+            'title' => 'Internal server error.',
+            'message' => 'An error occurred on the server. Please try again later.',
+        ],
+        'bad_gateway' => [
+            'title' => 'Bad gateway.',
+            'message' => 'Received an invalid response from the gateway server.',
+        ],
+        'service_unavailable' => [
+            'title' => 'Service unavailable.',
+            'message' => 'The service is currently unavailable. Please try again later.',
+        ],
+        'gateway_timeout' => [
+            'title' => 'Gateway timeout.',
+            'message' => 'The gateway server did not respond in time.',
+        ],
     ],
 ];

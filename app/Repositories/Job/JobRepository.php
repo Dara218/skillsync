@@ -7,7 +7,6 @@ use App\Interfaces\Job\JobInterface;
 use App\Models\Job;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class JobRepository extends BaseRepository implements JobInterface
 {

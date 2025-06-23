@@ -18,6 +18,10 @@
       </button>
     </form>
 
+    @if ($jobs->total())
+      {{ $jobs->lastItem() }} / {{ $jobs->total() }} {{ __('lang.label.jobs') }}
+    @endif
+
     {{-- Job Listings --}}
     @forelse ($jobs as $job)
       <div class="container__job-list">
