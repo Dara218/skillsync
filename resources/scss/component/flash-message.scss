@@ -1,0 +1,19 @@
+.flash-message {
+  @apply flex justify-between items-center gap-x-5 w-full mb-5 pl-5 pr-3 py-3 text-white bg-blue-500 rounded;
+
+  &__text {
+    @apply font-medium sp:text-sm;
+  }
+
+  &__icon {
+    @apply text-white/90 hover:text-white cursor-pointer text-lg min-w-5 transition-colors duration-200;
+  }
+
+  &--success {
+    @apply bg-emerald-500;
+  }
+
+  &--error {
+    @apply bg-red-500;
+  }
+}

@@ -1,0 +1,45 @@
+.pagination {
+  @apply inline-flex items-center justify-center border border-slate-300 rounded overflow-hidden divide-x divide-slate-300 text-[0];
+
+  &-container {
+    @apply mt-5 text-center;
+  }
+
+  &__link {
+    @apply inline-flex items-center justify-center h-8 px-2.5 bg-white gap-x-2 hover:bg-gray-50 text-base transition-colors duration-300;
+
+    & span[class^=icon] {
+      @apply text-sm;
+    }
+
+    &--disabled,
+    &.disabled,
+    &[aria-disabled=true] {
+      @apply pointer-events-none bg-stone-100 text-stone-300;
+    }
+
+    &--active,
+    &.active {
+      @apply pointer-events-none bg-slate-500 text-white;
+    }
+  }
+}
+
+.user .pagination {
+  @apply border-transparent divide-transparent gap-x-1.5;
+
+  &__link {
+    @apply px-2 rounded-sm hover:bg-gray-100;
+
+    &--disabled,
+    &.disabled,
+    &[aria-disabled=true] {
+      @apply bg-transparent;
+    }
+
+    &--active,
+    &.active {
+      @apply font-medium;
+    }
+  }
+}

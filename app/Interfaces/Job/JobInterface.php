@@ -18,7 +18,10 @@ interface JobInterface extends BaseInterface
     /**
      * Get the jobs data.
      *
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @param ?string $job The job title {jobs.title}
+     * @param ?int $paginationCount The pagination count of the list
+     *
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
      */
-    public function get(): LengthAwarePaginator;
+    public function get(?string $job = null, ?int $paginationCount = null);
 }

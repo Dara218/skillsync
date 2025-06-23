@@ -39,14 +39,17 @@ class JobRepository extends BaseRepository implements JobInterface
     /**
      * Get the jobs data.
      *
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @param ?string $job The job title {jobs.title}
+     * @param ?int $paginationCount The pagination count of the list
+     *
+     * @return \Illuminate\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection
      */
-    public function get(): LengthAwarePaginator
+    public function get(?string $job = null, ?int $paginationCount = null)
     {
-        $jobCount = config('constants.pagination.jobs');
+        $query = $this->model->search($job);
 
-        return $this->model
-            ->with('company')
-            ->paginate($jobCount);
+        return $paginationCount
+            ? $query->paginate($paginationCount)
+            : $query->get();
     }
 }

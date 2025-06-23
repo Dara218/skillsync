@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\{
+    Builder,
     Model,
     SoftDeletes,
 };
@@ -31,6 +32,16 @@ class Job extends Model
     ];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
+    protected $fillable = [
+        'job',
+        'title',
+    ];
+
+    /**
      * Get the associated company codes for the job.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<Company, Job>
@@ -38,5 +49,22 @@ class Job extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
+    }
+
+    /**
+     * Search job by title (jobs.title).
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param ?string $jobTitle The job title {jobs.title}
+     *
+     * @return Builder
+     */
+    public function scopeSearch(Builder $query, ?string $jobTitle): Builder
+    {
+        return $query
+            ->when($jobTitle, function ($query, $jobTitle) {
+                $query->where('title', 'LIKE', "%$jobTitle%");
+            })
+            ->with('company');
     }
 }
