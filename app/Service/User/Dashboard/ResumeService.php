@@ -9,10 +9,7 @@ use App\Service\Common\{
     S3Service,
 };
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\{
-    Auth,
-    DB,
-};
+use Illuminate\Support\Facades\Auth;
 
 class ResumeService
 {
@@ -55,8 +52,6 @@ class ResumeService
      */
     public function handleResumeUpload(UploadedFile $resume): void
     {
-        DB::beginTransaction();
-
         try {
             $systemResumePath = config('constants.file_path.resume');
             $user = Auth::guard(UserGuard::USER->value)->user();
@@ -74,11 +69,7 @@ class ResumeService
 
             // Update the users.resume_path in users table
             $this->updateResumePath($user->id, $resumePath);
-
-            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
-
             LogService::error(
                 'Error uploading the resume.',
                 [
@@ -113,8 +104,6 @@ class ResumeService
      */
     public function handleResumeDelete()
     {
-        DB::beginTransaction();
-
         try {
             $user = Auth::guard(UserGuard::USER->value)->user();
             $currentResumePath = $user->resume_path;
@@ -125,8 +114,6 @@ class ResumeService
 
             // Update the users.resume_path in users table
             $this->updateResumePath($user->id, null);
-
-            DB::commit();
         } catch (\Exception $e) {
             LogService::error(
                 'Error deleting the resume.',
@@ -136,8 +123,6 @@ class ResumeService
                 ],
                 self::CHANNEL_NAME,
             );
-
-            DB::rollBack();
         }
     }
 }

@@ -38,6 +38,12 @@ return [
         'no_info' => 'No info.',
         'no_description' => 'No description.',
         'jobs' => 'Jobs',
+        'personal_details' => 'Personal Details',
+        'address' => 'Address',
+        'contact_number' => 'Contact Number',
+        'birth_date' => 'Birth Date',
+        'update_profile_photo' => 'Update Profile Photo',
+        'change_password' => 'Change Password',
     ],
 
     'button' => [
@@ -55,6 +61,10 @@ return [
         'view' => 'View',
         'search' => 'Search',
         'go_back' => 'Go Back',
+        'update' => 'Update',
+        'update_email_address' => 'Update Email Address',
+        'updated_password' => 'Update Password',
+        'delete_account' => 'Delete Account',
     ],
 
     'link' => [

@@ -5,7 +5,7 @@
 @section('content')
   <div class="card">
     <h1 class="title">{{ __('lang.title.user_login') }}</h1>
-    <form action="{{ route('user.login.authenticate') }}" method="POST" id="form" class="form">
+    <form action="{{ route('user.login.authenticate') }}" method="POST" class="form">
       @csrf
       {{-- Email --}}
       <div>
@@ -47,7 +47,7 @@
 
       {{-- Submit Button --}}
       <div>
-        <button type="submit" id="submitBtn" class="button__submit">
+        <button type="submit" class="button__submit">
           {{ __('lang.button.login') }}
         </button>
       </div>

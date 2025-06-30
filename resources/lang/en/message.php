@@ -16,6 +16,7 @@ return [
         'your_account_has_been_verified' => 'Your account has been verified.',
         'resume_uploaded_successfully' => 'Resume uploaded successfully.',
         'resume_deleted_successfully' => 'Resume deleted succssfully.',
+        'profile_updated_sucessfully' => 'Personal info has been updated successfully.',
     ],
 
     'error' => [

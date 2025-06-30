@@ -16,68 +16,10 @@
 
 @section('content')
   <div class="container__dashboard">
+    {{-- Flash message --}}
+    @include('components.flash-message')
+
     <div class="card__dashboard-container">
-      {{-- Flash message --}}
-      @include('components.flash-message')
-
-      {{-- Resume Section --}}
-      <div class="card__resume col-span-2">
-        @if ($user->resume_path)
-          <div class="card__resume__container">
-            <div class="check-container">✓</div>
-            <span class="label__sm-semi-bold">
-              {{ __('lang.label.resume_uploaded') }}
-            </span>
-          </div>
-
-          <div class="flex flex-col sm:flex-row gap-2">
-            <button class="button__light">
-                {{ $user->resumeFileName }}
-            </button>
-            {{-- Delete Resume --}}
-            <form action="{{ route('user.resume.delete') }}" method="POST">
-              @csrf
-              @method('PUT')
-              <button class="button__light label__sm-semi-bold bg-red-100 w-full sm:w-auto">
-                {{ __('lang.button.delete') }}
-              </button>
-            </form>
-          </div>
-        @else
-          <div class="card__resume__container">
-            <div class="ballot-container">✘</div>
-            <span class="label__sm-semi-bold">
-              {{ __('lang.label.no_uploaded_resume') }}
-            </span>
-          </div>
-
-          <div class="flex flex-row gap-2">
-            <form action="{{ route('user.resume.upload') }}"
-              method="POST"
-              class="resume-form"
-              id="form"
-              enctype="multipart/form-data"
-            >
-              @csrf
-              @method('PUT')
-              <input
-                type="file"
-                name="resume_path"
-                accept=".pdf"
-                id="resumeInput"
-                class="button__light"
-              >
-              @error('resume_path')
-                <p class="error">{{ $message }}</p>
-              @enderror
-              <button type="submit" class="button__light" id="submitBtn">
-                {{ __('lang.button.upload') }}
-              </button>
-            </form>
-          </div>
-        @endif
-      </div>
-
       {{-- My Applications --}}
       <div class="card__dashboard-wrapper">
         <h2 class="label__lg-bold">{{ __('lang.label.my_applications') }}</h2>
@@ -135,6 +77,9 @@
   </div>
 
   @push('scripts')
-    @vite('resources/js/components/disableButtonSubmit.js')
+    @vite([
+        'resources/js/components/disableButtonSubmit.js',
+        'resources/js/components/toggleNavBar.js',
+    ])
   @endpush
 @endsection

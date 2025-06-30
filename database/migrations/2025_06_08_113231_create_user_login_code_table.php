@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_signup_code', function (Blueprint $table) {
             $table->id();
-            $table->string('email');
-            $table->string('code');
+            $table->string('email', 255);
+            $table->string('code', 255);
             $table->timestamps();
         });
     }

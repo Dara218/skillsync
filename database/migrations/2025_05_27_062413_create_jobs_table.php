@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('company_id');
-            $table->string('title');
-            $table->string('location');
+            $table->string('title', 255);
+            $table->string('location', 255);
             $table->enum('type', JobType::list());
             $table->string('salary_range')->nullable();
             $table->text('description');

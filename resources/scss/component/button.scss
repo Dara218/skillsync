@@ -23,4 +23,8 @@
     &__lg {
         @apply text-center px-4 py-3 border border-gray-300 rounded hover:bg-gray-50;
     }
+    
+    &__active {
+        @apply bg-blue-100 text-blue-700 font-medium rounded-md;
+    }
 }

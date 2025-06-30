@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Registration\UserRegistrationController;
 use App\Http\Controllers\User\{
     Authentication\AuthUserController,
-    Dashboard\UserDashboardController,
-};
-use App\Http\Controllers\User\{
     Dashboard\ResumeController,
+    Dashboard\UserDashboardController,
+    Job\JobsController,
+    Profile\ProfileController,
+    Registration\UserRegistrationController,
     VerifyEmail\UserVerifyController,
 };
-use App\Http\Controllers\User\Job\JobsController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('user.')->group(function () {
@@ -75,6 +74,17 @@ Route::name('user.')->group(function () {
             ->prefix('/jobs')
             ->group(function() {
                 Route::get('/', 'index')->name('index');
+            });
+
+        // Update Profile Routes
+        Route::controller(ProfileController::class)
+            ->name('profile.')
+            ->prefix('/profile')
+            ->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::put('/update/{id}', 'update')
+                    ->name('update')
+                    ->where(['id' => '[0-9]+']);
             });
     });
 });

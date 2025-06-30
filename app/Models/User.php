@@ -33,6 +33,10 @@ class User extends Authenticatable
         'password',
         'user_role',
         'resume_path',
+        'tel',
+        'birth_date',
+        'profile_picture_path',
+        'address',
         'email_verified_at',
     ];
 
@@ -55,6 +59,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
         ];
     }
 

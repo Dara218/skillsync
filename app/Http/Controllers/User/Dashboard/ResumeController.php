@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\UploadResumeRequest;
 use App\Service\Common\LogService;
 use App\Service\User\Dashboard\ResumeService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class ResumeController extends Controller
 {
@@ -36,11 +37,17 @@ class ResumeController extends Controller
      */
     public function upload(UploadResumeRequest $request): RedirectResponse
     {
+        DB::beginTransaction();
+
         try {
             $this->resumeService->handleResumeUpload($request->validated('resume_path'));
 
+            DB::commit();
+
             return back()->with('success', __('message.success.resume_uploaded_successfully'));
         } catch (\Exception $e) {
+            DB::rollBack();
+
             LogService::error(
                 'Error uploading the resume.',
                 [
@@ -60,11 +67,17 @@ class ResumeController extends Controller
      */
     public function delete(): RedirectResponse
     {
+        DB::beginTransaction();
+
         try {
             $this->resumeService->handleResumeDelete();
 
+            DB::commit();
+
             return back()->with('success', __('message.success.resume_deleted_successfully'));
         } catch (\Exception $e) {
+            DB::rollBack();
+
             LogService::error(
                 'Error deleting the resume.',
                 [

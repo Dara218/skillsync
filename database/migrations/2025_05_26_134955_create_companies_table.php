@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('logo_path');
-            $table->string('website');
+            $table->string('name', 255);
+            $table->string('email', 255)->unique();
+            $table->string('logo_path', 255);
+            $table->string('website', 255);
             $table->text('description');
             $table->timestamps();
 

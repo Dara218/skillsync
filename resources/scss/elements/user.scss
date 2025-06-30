@@ -33,3 +33,7 @@
 .ballot-container {
     @apply w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white text-xs;
 }
+
+.flex_col_layout {
+    @apply flex flex-col;
+}

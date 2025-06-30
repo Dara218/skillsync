@@ -5,3 +5,7 @@
 .logo {
     @apply h-12 w-auto;
 }
+
+.profile_photo {
+    @apply w-80 max-h-80 rounded-full;
+}

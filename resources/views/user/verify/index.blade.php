@@ -9,12 +9,7 @@
     
     <p class="label">{{ __('lang.note.enter_6_digit_verification_code') }}</p>
 
-    <form action="{{ route('user.logout') }}" method="POST">
-        @csrf
-        <button type="submit">Logout Temp</button>
-    </form>
-    
-    <form action="{{ route('user.verify.process') }}" method="POST" id="form" class="form">
+    <form action="{{ route('user.verify.process') }}" method="POST" class="form">
       @csrf
       <div>
         <label for="code" class="label">{{ __('lang.label.verification_code') }}</label>
@@ -24,7 +19,7 @@
         @enderror
       </div>
 
-      <button type="submit" class="button__submit" id="submitBtn">{{ __('lang.button.verify') }}</button>
+      <button type="submit" class="button__submit">{{ __('lang.button.verify') }}</button>
     </form>
   </div>
 

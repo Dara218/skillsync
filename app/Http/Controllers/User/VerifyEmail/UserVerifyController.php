@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserVerificationRequest;
 use App\Service\Common\LogService;
 use App\Service\User\Verification\UserVerificationService;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class UserVerifyController extends Controller
@@ -51,14 +51,20 @@ class UserVerifyController extends Controller
      */
     public function verify(UserVerificationRequest $request)
     {
+        DB::beginTransaction();
+
         try {
             $code = $request->validated('code');
 
             if ($this->verificationService->handleVerification($code)) {
+                DB::commit();
+
                 return redirect()
                     ->route('user.dashboard')
                     ->with('success', __('message.success.your_account_has_been_verified'));
             }
+
+            DB::rollBack();
 
             return back()->with('error', __('message.error.verification_expired_sent_a_new_one'));
         } catch (CodeLatestException | CodeExpiredException $e) {
@@ -66,6 +72,8 @@ class UserVerifyController extends Controller
                 'code' => $e->getMessage(),
             ]);
         } catch (\Exception $e) {
+            DB::rollBack();
+
             LogService::error(
                 'Error processing the code verification.',
                 [

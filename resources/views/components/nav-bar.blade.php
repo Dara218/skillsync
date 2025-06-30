@@ -20,38 +20,36 @@
     {{-- Nav Links --}}
     <nav id="navMenu" class="navbar-navMenu hidden md:block">
       <ul class="navbar-navMenu__wrapper">
-        @if (Route::is('user.dashboard'))
-          <li>
+        @if (Auth::guard(App\Enums\common\UserGuard::USER->value)->user()->email_verified_at)
+          <li class="@if(Route::is('user.jobs.index')) button__active @endif">
             <a href="{{ route('user.jobs.index') }}" class="navbar-navMenu__item">
               <i class="fas fa-briefcase"></i> 
               {{ __('lang.link.browse_all_jobs') }}
-            </a>
+              </a>
           </li>
-        @endif
 
-        @if (Route::is('user.jobs.index'))
-          <li>
+          <li class="@if(Route::is('user.dashboard')) button__active @endif">
             <a href="{{ route('user.dashboard') }}" class="navbar-navMenu__item">
               <i class="fas fa-tachometer-alt"></i> 
               {{ __('lang.link.dashboard') }}
             </a>
           </li>
+
+          <li class="@if(Route::is('user.profile.index')) button__active @endif">
+            <a href="{{ route('user.profile.index') }}" class="navbar-navMenu__item">
+              <i class="fas fa-user-edit"></i> 
+              {{ __('lang.link.update_profile') }}
+            </a>
+          </li>
+
+          <li>
+            <a href="#" class="navbar-navMenu__item">
+              <i class="fas fa-folder-open"></i> 
+              {{ __('lang.link.my_applications') }}
+            </a>
+          </li>
         @endif
 
-        <li>
-          <a href="#" class="navbar-navMenu__item">
-            <i class="fas fa-user-edit"></i> 
-            {{ __('lang.link.update_profile') }}
-          </a>
-        </li>
-        
-        <li>
-          <a href="#" class="navbar-navMenu__item">
-            <i class="fas fa-folder-open"></i> 
-            {{ __('lang.link.my_applications') }}
-          </a>
-        </li>
-        
         <li class="md:border-l md:border-gray-200 md:pl-4 md:ml-2">
           <form action="{{ route('user.logout') }}" method="POST">
             @csrf

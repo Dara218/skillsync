@@ -38,6 +38,13 @@ return [
         'no_info' => '情報はない。',
         'no_description' => '記述がない。',
         'jobs' => '求人',
+        'personal_details' => '個人の詳細',
+        'address' => '住所',
+        'contact_number' => '連絡先',
+        'birth_date' => '生年月日',
+        'update' => '更新',
+        'update_profile_photo' => 'プロフィール写真の更新',
+        'change_password' => 'パスワードを変更する',
     ],
 
     'button' => [
@@ -55,6 +62,9 @@ return [
         'view' => 'ビュー',
         'search' => '探索',
         'go_back' => '戻る',
+        'update_email_address' => 'メールアドレスの更新',
+        'updated_password' => 'パスワードの更新',
+        'delete_account' => 'アカウント削除',
     ],
 
     'link' => [

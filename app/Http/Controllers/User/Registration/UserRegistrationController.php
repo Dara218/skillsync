@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Registration;
+namespace App\Http\Controllers\User\Registration;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRegisterRequest;
@@ -10,6 +10,7 @@ use App\Service\User\{
     Registration\UserRegisterService,
 };
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class UserRegistrationController extends Controller
@@ -58,6 +59,8 @@ class UserRegistrationController extends Controller
      */
     public function store(UserRegisterRequest $request): RedirectResponse
     {
+        DB::beginTransaction();
+
         try {
             $this->userRegisterService
                 ->handleRegistration($request->validated());
@@ -66,10 +69,14 @@ class UserRegistrationController extends Controller
                 $request->only('email', 'password')
             );
 
+            DB::commit();
+
             return redirect()
                 ->route('user.verify.index')
                 ->with('success', __('message.success.successful_email_registration'));
         } catch (\Exception $e) {
+            DB::rollBack();
+
             LogService::error(
                 'Error processing user registration.',
                 [
