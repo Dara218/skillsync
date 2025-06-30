@@ -8,10 +8,7 @@ use App\Interfaces\User\{
 };
 use App\Mail\UserRegister;
 use App\Service\Common\LogService;
-use Illuminate\Support\Facades\{
-    DB,
-    Mail,
-};
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class UserRegisterService
@@ -50,8 +47,6 @@ class UserRegisterService
      */
     public function handleRegistration(array $data): void
     {
-        DB::beginTransaction();
-
         try {
             $user = $this->userInterface->create($data);
 
@@ -63,11 +58,7 @@ class UserRegisterService
                 $user->only('email', 'name'),
                 $userCode,
             ));
-
-            Db::commit();
         } catch (\Exception $e) {
-            DB::rollBack();
-
             LogService::error(
                 'Error processing user registration.',
                 [

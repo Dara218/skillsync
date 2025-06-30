@@ -86,15 +86,4 @@ $(() => {
       $('body').removeClass('overflow-hidden');
     }
   });
-
-  // Add active state to current page link
-  const currentPath = window.location.pathname;
-
-  $navMenu.find('a').each(function() {
-    const linkPath = $(this).attr('href');
-
-    if (linkPath && currentPath.includes(linkPath.split('/').pop())) {
-      $(this).addClass('bg-blue-100 text-blue-700 font-medium');
-    }
-  });
 });

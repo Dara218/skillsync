@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('Qwerty123@'),
                 'user_role' => UserRole::ADMIN->value,
                 'resume_path' => null,
+                'profile_picture_path' => null,
                 'email_verified_at' => now(),
             ],
         ];

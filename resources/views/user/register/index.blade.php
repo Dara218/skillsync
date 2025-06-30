@@ -5,7 +5,7 @@
 @section('content')
   <div class="card">
     <h1 class="title">{{ __('lang.title.signup') }}</h1>
-    <form action="{{ route('user.register.store') }}" method="POST" id="form" class="form">
+    <form action="{{ route('user.register.store') }}" method="POST" class="form">
       @csrf
       {{-- Name --}}
       <div>
@@ -71,7 +71,7 @@
         @enderror
       </div>
 
-      <button type="submit" class="button__submit" id="submitBtn">
+      <button type="submit" class="button__submit">
         {{ __('lang.button.register') }}
       </button>
       

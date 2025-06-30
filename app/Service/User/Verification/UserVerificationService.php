@@ -17,7 +17,6 @@ use App\Service\User\Registration\UserRegisterService;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\{
     Auth,
-    DB,
     Mail,
 };
 
@@ -67,8 +66,6 @@ class UserVerificationService
      */
     public function handleVerification(string $code): bool
     {
-        DB::beginTransaction();
-
         try {
             $data = $this->verifyCodeInterface->getByCode($code);
 
@@ -89,17 +86,11 @@ class UserVerificationService
 
             // Todo: Add re-send verification code feature.
 
-            DB::commit();
-
             return $isCodeValid;
         } catch (CodeLatestException $e) {
-            DB::rollBack();
-
             // Re-throw custom exceptions so controller can catch them
             throw $e;
         } catch (\Exception $e) {
-            DB::rollBack();
-
             LogService::error(
                 'Error processing the code verification.',
                 [

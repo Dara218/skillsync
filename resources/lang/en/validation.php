@@ -22,6 +22,13 @@ return [
         'array' => 'Cannot contain more than :max items.',
     ],
     'in' => 'The selected :attribute is invalid.',
+    'password' => [
+        'letters' => ':attribute must contain at least one letter' , 
+        'mixed' => ':attribute must contain both upper and lower case letters' , 
+        'numbers' => ':attribute must contain at least one number' , 
+        'symbols' => ':attribute must contain at least one symbol.' ,
+    ],
+    'phone' => 'The :attribute field must be a valid PH number.',
 
     /*
     |--------------------------------------------------------------------------
@@ -57,5 +64,6 @@ return [
         'email' => 'email address',
         'password' => 'password',
         'name' => 'name',
+        'tel' => 'Contact Number',
     ],
 ];

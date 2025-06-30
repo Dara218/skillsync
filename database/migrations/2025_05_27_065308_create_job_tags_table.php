@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('job_tags', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('name', 255);
             $table->timestamps();
 
             // Indexes

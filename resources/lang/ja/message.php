@@ -16,6 +16,7 @@ return [
         'your_account_has_been_verified' => 'アカウントが認証されました。',
         'resume_uploaded_successfully' => '履歴書は正常にアップロードされました。',
         'resume_deleted_successfully' => '履歴書は正常に削除された。',
+        'profile_updated_sucessfully' => '個人情報は正常に更新されました。',
     ],
 
     'error' => [
