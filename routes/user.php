@@ -65,7 +65,7 @@ Route::name('user.')->group(function () {
             ->name('resume.')
             ->group(function() {
                 Route::put('/upload', 'upload')->name('upload');
-                Route::put('/delete', 'delete')->name('delete');
+                Route::delete('/delete', 'delete')->name('delete');
             });
 
         // Jobs Routes

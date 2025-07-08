@@ -102,7 +102,7 @@ class ResumeService
      *
      * @return void
      */
-    public function handleResumeDelete()
+    public function handleResumeDelete(): void
     {
         try {
             $user = Auth::guard(UserGuard::USER->value)->user();
