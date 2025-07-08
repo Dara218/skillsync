@@ -86,6 +86,8 @@ class ProfileController extends Controller
 
         $errorMessage = __('message.error.failed_handling_the_process');
 
+        // Todo: Work on update email page.
+
         try {
             $isUpdated = $this->profileService
                 ->updateProfile($request->validated(), $id);

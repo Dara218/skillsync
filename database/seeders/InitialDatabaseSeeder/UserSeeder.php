@@ -3,7 +3,10 @@
 namespace Database\Seeders\InitialDatabaseSeeder;
 
 use App\Enums\common\UserRole;
-use App\Models\User;
+use App\Models\{
+    User,
+    UserSignupCode,
+};
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -40,8 +43,14 @@ class UserSeeder extends Seeder
 
         $count = count($users);
 
-        User::factory($count)
+        $createdUsers = User::factory($count)
             ->sequence(...$users)
             ->create();
+
+        $createdUsers->each(function ($user) {
+            UserSignupCode::factory()->create([
+                'email' => $user->email,
+            ]);
+        });
     }
 }

@@ -25,7 +25,7 @@
             {{-- Delete Resume --}}
             <form action="{{ route('user.resume.delete') }}" method="POST">
               @csrf
-              @method('PUT')
+              @method('DELETE')
               <button class="button__light label__sm-semi-bold bg-red-100 w-full sm:w-auto">
                 {{ __('lang.button.delete') }}
               </button>
