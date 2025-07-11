@@ -65,5 +65,6 @@ return [
         'password' => 'password',
         'name' => 'name',
         'tel' => 'Contact Number',
+        'username' => 'Username',
     ],
 ];

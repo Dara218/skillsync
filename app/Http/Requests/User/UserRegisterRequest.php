@@ -36,6 +36,11 @@ class UserRegisterRequest extends FormRequest
                 Rule::unique('users')->whereNull('deleted_at'),
                 'max:' . config('constants.validation.max_email_address_chars'),
             ],
+            'username' => [
+                'required',
+                Rule::unique('users')->whereNull('deleted_at'),
+                'max:' . config('constants.validation.max_username_chars'),
+            ],
             'password' => [
                 'required',
                 Password::min(config('constants.validation.min_password_chars'))

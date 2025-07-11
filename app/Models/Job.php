@@ -57,7 +57,7 @@ class Job extends Model
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @param ?string $jobTitle The job title {jobs.title}
      *
-     * @return Builder
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeSearch(Builder $query, ?string $jobTitle): Builder
     {

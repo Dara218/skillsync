@@ -11,9 +11,11 @@ use App\Interfaces\User\{
     UserInterface,
     UserRegisterCodeInterface,
 };
-use App\Mail\UserRegister;
-use App\Service\Common\LogService;
-use App\Service\User\Registration\UserRegisterService;
+use App\Mail\UserRegisterMail;
+use App\Service\Common\{
+    LogService,
+    VerificationCodeService,
+};
 use Carbon\Carbon;
 use Illuminate\Support\Facades\{
     Auth,
@@ -30,11 +32,11 @@ class UserVerificationService
     protected UserRegisterCodeInterface $verifyCodeInterface;
 
     /**
-     * UserRegisterService instance.
+     * VerificationCodeService instance.
      *
-     * @var \App\Service\User\Registration\UserRegisterService $userRegisterService
+     * @var \App\Service\Common\VerificationCodeService $codeService
      */
-    protected UserRegisterService $userRegisterService;
+    protected VerificationCodeService $codeService;
 
     /**
      * UserRegisterService instance.
@@ -51,7 +53,7 @@ class UserVerificationService
     public function __construct(UserRegisterCodeInterface $verifyCodeInterface)
     {
         $this->verifyCodeInterface = $verifyCodeInterface;
-        $this->userRegisterService = app(UserRegisterService::class);
+        $this->codeService = app(VerificationCodeService::class);
         $this->userInterface = app(UserInterface::class);
     }
 
@@ -140,11 +142,10 @@ class UserVerificationService
 
             if ($isCodeExpired && $data->code === $latestSignupCode) {
                 // Generate a new verification code to database
-                $newVerificationCode = $this->userRegisterService
-                    ->generateRegisterCode($data->email);
+                $newVerificationCode = $this->codeService->generateRegisterCode($data->email);
 
                 // If latest data is expired, generate new email
-                Mail::to($data->email)->send(new UserRegister(
+                Mail::to($data->email)->send(new UserRegisterMail(
                     $data->only('email', 'name'),
                     $newVerificationCode,
                 ));

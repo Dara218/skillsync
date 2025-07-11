@@ -45,6 +45,7 @@ return [
         'update' => '更新',
         'update_profile_photo' => 'プロフィール写真の更新',
         'change_password' => 'パスワードを変更する',
+        'username' => 'ユーザー名',
     ],
 
     'button' => [
@@ -65,6 +66,7 @@ return [
         'update_email_address' => 'メールアドレスの更新',
         'updated_password' => 'パスワードの更新',
         'delete_account' => 'アカウント削除',
+        'send' => '送る',
     ],
 
     'link' => [
@@ -83,6 +85,8 @@ return [
         'user_verify' => 'ユーザー検証',
         'dashboard' => 'ダッシュボード',
         'jobs' => '求人',
+        'error' => ':PAGE_TITLE',
+        'update_email' => 'メールアドレスの更新',
     ],
 
     'note' => [
@@ -95,6 +99,7 @@ return [
         ],
         'enter_6_digit_verification_code' => 'ご登録のEメールアドレスに送信される6桁の認証コードを入力してください。',
         'dashboard_welcome' => 'おかえりなさい、:name！次のチャンスを見つける準備はできましたか？',
+        'link_will_be_sent_to_the_email' => '下記のEメールアドレスにリンクが送信されます。',
     ],
 
     'placeholder' => [

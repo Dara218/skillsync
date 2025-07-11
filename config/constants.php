@@ -21,6 +21,7 @@ return [
         'max_email_address_chars' => 40,
         'max_address_chars' => 255,
         'min_password_chars' => 8,
+        'max_username_chars' => 10,
     ],
     'user_register_code_length' => 6,
     'suggested_company_count' => 5,

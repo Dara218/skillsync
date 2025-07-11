@@ -3,7 +3,7 @@
 namespace App\Enums\common;
 
 /**
- * Enums for job publish tabg (jobs.is_published).
+ * Enums for job publish tag (jobs.is_published).
  */
 enum JobPublishTag: int
 {

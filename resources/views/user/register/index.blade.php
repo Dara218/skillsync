@@ -41,6 +41,22 @@
         @enderror
       </div>
 
+      <div>
+        <label for="username" class="label">
+          {{ __('lang.label.username') }}
+        </label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="input"
+          value="{{ old('username') }}"
+        >
+        @error('username')
+          <p class="error">{{ $message }}</p>
+        @enderror
+      </div>
+
       {{-- Password --}}
       <div>
         <label for="password" class="label">
