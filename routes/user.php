@@ -5,6 +5,7 @@ use App\Http\Controllers\User\{
     Dashboard\ResumeController,
     Dashboard\UserDashboardController,
     Job\JobsController,
+    Profile\EmailAddressController,
     Profile\ProfileController,
     Registration\UserRegistrationController,
     VerifyEmail\UserVerifyController,
@@ -76,21 +77,31 @@ Route::name('user.')->group(function () {
                 Route::get('/', 'index')->name('index');
             });
 
-        // Update Profile Routes
-        Route::controller(ProfileController::class)
-            ->name('profile.')
+        // Update User Routes
+        Route::name('profile.')
             ->prefix('/profile')
             ->group(function() {
-                Route::get('/{username}', 'index')->name('index');
-                Route::name('update.')
-                    ->prefix('/update')
-                    ->group(function () {
-                        Route::put('/{id}', 'update')
-                            ->name('personal-info')
-                            ->where(['id' => '[0-9]+']);
-                        Route::get('/update-email', 'viewUpdateEmailPage')->name('show-update-email');
-                        Route::post('/update-email', 'sendEmailAddressLink')->name('send-email');
-                        Route::get('/update-email-process', 'updateEmailAddress')->name('email');
+                // Update Profile Routes
+                Route::controller(ProfileController::class)->group(function() {
+                    Route::get('/{username}', 'index')->name('index');
+                    Route::name('update.')
+                        ->prefix('/update')
+                        ->group(function () {
+                            Route::put('/{id}', 'update')
+                                ->name('personal-info')
+                                ->where(['id' => '[0-9]+']);
+                        });
+                });
+                // Update Email Routes
+                Route::controller(EmailAddressController::class)
+                    ->group(function() {
+                        Route::name('update.')
+                            ->prefix('/update')
+                            ->group(function () {
+                                Route::get('/update-email', 'viewUpdateEmailPage')->name('show-update-email');
+                                Route::post('/update-email', 'sendEmailAddressLink')->name('send-email');
+                                Route::get('/update-email-process', 'updateEmailAddress')->name('email');
+                            });
                     });
             });
     });
