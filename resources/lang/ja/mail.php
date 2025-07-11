@@ -12,7 +12,9 @@ return [
     |
     */
 
-    'email_verification' => [
-        'subject' => 'スキルシンクへようこそ - :page',
+    'subject' => [
+        'prefix' => 'SkillSync - :page',
+        'email_verification' => 'サインアップ',
+        'update_email' => '電子メールの更新',
     ],
 ];

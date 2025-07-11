@@ -6,10 +6,12 @@ use App\Interfaces\User\{
     UserInterface,
     UserRegisterCodeInterface,
 };
-use App\Mail\UserRegister;
-use App\Service\Common\LogService;
+use App\Mail\UserRegisterMail;
+use App\Service\Common\{
+    LogService,
+    VerificationCodeService,
+};
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class UserRegisterService
 {
@@ -28,6 +30,13 @@ class UserRegisterService
     protected UserRegisterCodeInterface $userCodeInterface;
 
     /**
+     * VerificationCodeService instance.
+     *
+     * @var \App\Service\Common\VerificationCodeService $codeService
+     */
+    protected VerificationCodeService $codeService;
+
+    /**
      * Constructor for initializing UserInterface.
      *
      * @param \App\Interfaces\User\UserInterface $userInterface
@@ -36,6 +45,7 @@ class UserRegisterService
     {
         $this->userInterface = $userInterface;
         $this->userCodeInterface = app(UserRegisterCodeInterface::class);
+        $this->codeService = app(VerificationCodeService::class);
     }
 
     /**
@@ -51,45 +61,16 @@ class UserRegisterService
             $user = $this->userInterface->create($data);
 
             // Generate user code for email verification
-            $userCode = $this->generateRegisterCode($user->email);
+            $userCode = $this->codeService->generateRegisterCode($user->email);
 
             // Send registration email
-            Mail::to($user->email)->send(new UserRegister(
+            Mail::to($user->email)->send(new UserRegisterMail(
                 $user->only('email', 'name'),
                 $userCode,
             ));
         } catch (\Exception $e) {
             LogService::error(
                 'Error processing user registration.',
-                [
-                    'error' => $e->getMessage(),
-                    'trace' => $e->getTraceAsString(),
-                ],
-            );
-        }
-    }
-
-    /**
-     * Handle process of creating a user code for verification.
-     *
-     * @param string $email (users.code)
-     *
-     * @return mixed
-     */
-    public function generateRegisterCode(string $email)
-    {
-        try {
-            $data = [
-                'email' => $email,
-                'code' => Str::random(config('constants.user_register_code_length')),
-            ];
-
-            $this->userCodeInterface->create($data);
-
-            return $data['code'];
-        } catch (\Exception $e) {
-            LogService::error(
-                'Error generating register code.',
                 [
                     'error' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),

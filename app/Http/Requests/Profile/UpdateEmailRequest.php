@@ -5,7 +5,7 @@ namespace App\Http\Requests\Profile;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdateProfileRequest extends FormRequest
+class UpdateEmailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,24 +25,11 @@ class UpdateProfileRequest extends FormRequest
         $userId = $this->route('id');
 
         return [
-            'name' => [
+            'email' => [
                 'required',
-                'string',
-                'max:' . config('constants.validation.default_max_chars'),
-            ],
-            'username' => [
-                'required',
+                'email',
                 Rule::unique('users')->whereNull('deleted_at')->ignore($userId),
-                'max:' . config('constants.validation.max_username_chars'),
-            ],
-            'address' => [
-                'max:' . config('constants.validation.max_address_chars'),
-            ],
-            'tel' => [
-                'phone:PH',
-            ],
-            'birth_date' => [
-                'date',
+                'max:' . config('constants.validation.max_email_address_chars'),
             ],
         ];
     }

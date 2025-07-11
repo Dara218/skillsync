@@ -6,7 +6,7 @@ use App\Enums\common\{
     UserGuard,
     UserRole,
 };
-use App\Mail\UserRegister;
+use App\Mail\UserRegisterMail;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\{
     Auth,
@@ -78,7 +78,7 @@ class RegisterTest extends TestCase
             ]);
 
         // Assert email was sent
-        Mail::assertSent(UserRegister::class, fn($mail) => $mail->hasTo($user->email));
+        Mail::assertSent(UserRegisterMail::class, fn($mail) => $mail->hasTo($user->email));
     }
 
     /**
@@ -110,6 +110,6 @@ class RegisterTest extends TestCase
             ->assertDatabaseMissing('users', $invalidDetails);
 
         // Assert email was not sent
-        Mail::assertNotSent(UserRegister::class, fn($mail) => $mail->hasTo($invalidDetails['email']));
+        Mail::assertNotSent(UserRegisterMail::class, fn($mail) => $mail->hasTo($invalidDetails['email']));
     }
 }

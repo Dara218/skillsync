@@ -81,10 +81,17 @@ Route::name('user.')->group(function () {
             ->name('profile.')
             ->prefix('/profile')
             ->group(function() {
-                Route::get('/', 'index')->name('index');
-                Route::put('/update/{id}', 'update')
-                    ->name('update')
-                    ->where(['id' => '[0-9]+']);
+                Route::get('/{username}', 'index')->name('index');
+                Route::name('update.')
+                    ->prefix('/update')
+                    ->group(function () {
+                        Route::put('/{id}', 'update')
+                            ->name('personal-info')
+                            ->where(['id' => '[0-9]+']);
+                        Route::get('/update-email', 'viewUpdateEmailPage')->name('show-update-email');
+                        Route::post('/update-email', 'sendEmailAddressLink')->name('send-email');
+                        Route::get('/update-email-process', 'updateEmailAddress')->name('email');
+                    });
             });
     });
 });

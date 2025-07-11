@@ -69,9 +69,9 @@
       <div class="card__dashboard-wrapper flex_col_layout">
         <h2 class="label__lg-bold">{{ __('lang.label.personal_details') }}</h2>
         <form 
-          action="{{ route('user.profile.update', ['id' => $user->id]) }}"
+          action="{{ route('user.profile.update.personal-info', ['id' => $user->id]) }}"
           method="POST"
-          class="form flex_col_layout gap-3"
+          class="form flex_col_layout"
         >
           @csrf
           @method('PUT')
@@ -97,16 +97,21 @@
             <div class="input button--disabled">
                 {{ $user->email }}
             </div>
-            {{-- <input
+          </div>
+          <div>
+            <label for="username" class="label">
+              {{ __('lang.label.username') }}
+            </label>
+            <input
               type="text"
-              name="email"
-              id="email"
+              name="username"
+              id="username"
               class="input"
-              value="{{ old('email', $user->email) }}"
+              value="{{ old('username', $user->username) }}"
             >
-            @error('email')
+            @error('username')
               <p class="error">{{ $message }}</p>
-            @enderror --}}
+            @enderror
           </div>
           <div>
             <label for="address" class="label">
@@ -191,7 +196,7 @@
 
         <div class="card__dashboard-wrapper">
           <div class="form flex_col_layout">
-            <a href="#" class="button__lg w-full">
+            <a href="{{ route('user.profile.update.show-update-email') }}" class="button__lg w-full">
               {{ __('lang.button.update_email_address') }}
             </a>
             <a href="#" class="button__lg w-full">

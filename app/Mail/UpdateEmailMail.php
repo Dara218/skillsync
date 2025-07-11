@@ -3,42 +3,33 @@
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Mail\Mailable;
-use Illuminate\Mail\Mailables\{
-    Content,
-    Envelope,
+use Illuminate\Mail\{
+    Mailable,
+    Mailables\Content,
+    Mailables\Envelope
 };
 use Illuminate\Queue\SerializesModels;
 
-class UserRegister extends Mailable
+class UpdateEmailMail extends Mailable
 {
     use Queueable;
     use SerializesModels;
 
     /**
-     * Contains user's name and email (users.name, users.email)
+     * Contains user's name, new and old email (users.name, users.email), and url
      *
      * @var array
      */
     protected array $data;
 
     /**
-     * The user login code (user_login_code.code)
-     *
-     * @var array
-     */
-    protected string $code;
-
-    /**
      * Create a new message instance.
      *
      * @param array<mixed, string> $data
-     * @param string $code (user_login_code.code)
      */
-    public function __construct(array $data, string $code)
+    public function __construct(array $data)
     {
         $this->data = $data;
-        $this->code = $code;
     }
 
     /**
@@ -47,7 +38,7 @@ class UserRegister extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('mail.email_verification.subject', ['page' => 'Signup']),
+            subject: __('mail.subject.prefix', ['page' => __('mail.subject.update_email')]),
         );
     }
 
@@ -57,8 +48,8 @@ class UserRegister extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.user-register',
-            with: array_merge($this->data, ['code' => $this->code]),
+            markdown: 'mail.update-email-mail',
+            with: $this->data,
         );
     }
 

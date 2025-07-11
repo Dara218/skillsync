@@ -44,6 +44,7 @@ return [
         'birth_date' => 'Birth Date',
         'update_profile_photo' => 'Update Profile Photo',
         'change_password' => 'Change Password',
+        'username' => 'Username',
     ],
 
     'button' => [
@@ -65,6 +66,7 @@ return [
         'update_email_address' => 'Update Email Address',
         'updated_password' => 'Update Password',
         'delete_account' => 'Delete Account',
+        'send' => 'Send',
     ],
 
     'link' => [
@@ -84,6 +86,7 @@ return [
         'dashboard' => 'Dashboard',
         'jobs' => 'Jobs',
         'error' => ':PAGE_TITLE',
+        'update_email' => 'Update Email Address',
     ],
 
     'note' => [
@@ -96,6 +99,7 @@ return [
         ],
         'enter_6_digit_verification_code' => 'Enter a 6 digit verification code sent to your registered email address.',
         'dashboard_welcome' => 'Welcome back, :name! Ready to find your next opportunity?',
+        'link_will_be_sent_to_the_email' => 'A link will be sent to the provided email address below.',
     ],
 
     'placeholder' => [

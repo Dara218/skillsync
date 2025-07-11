@@ -17,10 +17,12 @@ return [
         'resume_uploaded_successfully' => 'Resume uploaded successfully.',
         'resume_deleted_successfully' => 'Resume deleted succssfully.',
         'profile_updated_sucessfully' => 'Personal info has been updated successfully.',
+        'a_link_has_been_sent_to_the_provided_email' => 'A link has been sent to the provided email.',
+        'your_email_address_has_been_updated' => 'Your email address has been updated.',
     ],
 
     'error' => [
-        'failed_handling_the_process' => 'Failed to process. Please contact the system administrator.',
+        'failed handling_the_process' => 'Failed to process. Please contact the system administrator.',
         'verification_expired_sent_a_new_one' => "Your verification code has expired. We've sent a new one—please check your email.",
     ],
 ];

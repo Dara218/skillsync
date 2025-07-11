@@ -1,3 +1,7 @@
+@php
+  $user = Auth::guard(App\Enums\common\UserGuard::USER->value)->user();
+@endphp
+
 <header class="navbar__container">
   <div class="navbar__wrapper">
     {{-- Logo --}}
@@ -20,7 +24,7 @@
     {{-- Nav Links --}}
     <nav id="navMenu" class="navbar-navMenu hidden md:block">
       <ul class="navbar-navMenu__wrapper">
-        @if (Auth::guard(App\Enums\common\UserGuard::USER->value)->user()->email_verified_at)
+        @if ($user->email_verified_at)
           <li class="@if(Route::is('user.jobs.index')) button__active @endif">
             <a href="{{ route('user.jobs.index') }}" class="navbar-navMenu__item">
               <i class="fas fa-briefcase"></i> 
@@ -36,7 +40,7 @@
           </li>
 
           <li class="@if(Route::is('user.profile.index')) button__active @endif">
-            <a href="{{ route('user.profile.index') }}" class="navbar-navMenu__item">
+            <a href="{{ route('user.profile.index', ['username' => $user->username]) }}" class="navbar-navMenu__item">
               <i class="fas fa-user-edit"></i> 
               {{ __('lang.link.update_profile') }}
             </a>

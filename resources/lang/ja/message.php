@@ -17,6 +17,8 @@ return [
         'resume_uploaded_successfully' => '履歴書は正常にアップロードされました。',
         'resume_deleted_successfully' => '履歴書は正常に削除された。',
         'profile_updated_sucessfully' => '個人情報は正常に更新されました。',
+        'a_link_has_been_sent_to_the_provided_email' => '提供されたEメールにリンクが送信されました。',
+        'your_email_address_has_been_updated' => 'メールアドレスが更新されました',
     ],
 
     'error' => [
