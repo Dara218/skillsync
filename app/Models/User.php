@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -71,7 +72,20 @@ class User extends Authenticatable
      */
     public function getResumeFileNameAttribute(): string
     {
+        // Removes both slash (/) and backslash (\)
         return basename($this->resume_path);
+    }
+
+    /**
+     * Get the profile photo file name from the resume path.
+     *
+     * @return string
+     */
+    public function getProfilePictureAttribute(): ?string
+    {
+        return $this->profile_picture_path
+            ? Storage::disk('s3')->url($this->profile_picture_path)
+            : null;
     }
 
     /**

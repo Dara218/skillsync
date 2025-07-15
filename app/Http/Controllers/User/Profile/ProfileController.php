@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User\Profile;
 
 use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Requests\Profile\{
+    UpdateProfilePhotoRequest,
+    UpdateProfileRequest,
+};
 use App\Interfaces\{
     Job\JobInterface,
     User\UserInterface,
@@ -113,7 +116,12 @@ class ProfileController extends Controller
 
             DB::commit();
 
-            return back()->with('success', __('message.success.resume_uploaded_successfully'));
+            // Re-fetch the updated user to get the new username
+            $updatedUser = $this->userInterface->find($id);
+
+            return redirect()
+                ->route('user.profile.index', ['username' => $updatedUser->username])
+                ->with('success', __('message.success.resume_uploaded_successfully'));
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -126,6 +134,70 @@ class ProfileController extends Controller
             );
 
             return back()->with('error', $errorMessage);
+        }
+    }
+
+    /**
+     * Update the user profile photo.
+     *
+     * @param \App\Http\Requests\Profile\UpdateProfileRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateProfilePhoto(UpdateProfilePhotoRequest $request): RedirectResponse
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->profileService->handleProfilePhotoUpload(
+                $request->validated('profile_picture_path')
+            );
+
+            DB::commit();
+
+            return back()->with('success', __('message.success.profile_photo_uploaded_successfully'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            LogService::error(
+                'Error uploading the profile photo.',
+                [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ],
+            );
+
+            return back()->with('error', __('message.error.failed_handling_the_process'));
+        }
+    }
+
+    /**
+     * Delete the user profile photo.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteProfilePhoto(): RedirectResponse
+    {
+        DB::beginTransaction();
+
+        try {
+            $this->profileService->handleProfilePhotoDelete();
+
+            DB::commit();
+
+            return back()->with('success', __('message.success.profile_photo_deleted_successfully'));
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            LogService::error(
+                'Error deleting the profile photo.',
+                [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                ],
+            );
+
+            return back()->with('error', __('message.error.failed_handling_the_process'));
         }
     }
 }

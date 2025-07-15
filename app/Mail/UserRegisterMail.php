@@ -56,8 +56,6 @@ class UserRegisterMail extends Mailable
      */
     public function content(): Content
     {
-        // TODO: Update class name to UserRegisterMail
-
         return new Content(
             markdown: 'mail.user-register',
             with: array_merge($this->data, ['code' => $this->code]),
