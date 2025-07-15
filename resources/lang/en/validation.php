@@ -29,6 +29,7 @@ return [
         'symbols' => ':attribute must contain at least one symbol.' ,
     ],
     'phone' => 'The :attribute field must be a valid PH number.',
+    'mimes' => 'The :attribute field must be a :values.',
 
     /*
     |--------------------------------------------------------------------------
@@ -66,5 +67,6 @@ return [
         'name' => 'name',
         'tel' => 'Contact Number',
         'username' => 'Username',
+        'profile_picture_path' => 'Profile Picture',
     ],
 ];

@@ -6,6 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/images/skillsync_logo.jpeg',
+                'resources/images/default-profile-image.jpeg',
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/scss/admin.scss',

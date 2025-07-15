@@ -20,7 +20,7 @@
 
           <div class="flex_col_layout sm:flex-row gap-2">
             <button class="button__light">
-                {{ $user->resumeFileName }}
+              {{ $user->resumeFileName }}
             </button>
             {{-- Delete Resume --}}
             <form action="{{ route('user.resume.delete') }}" method="POST">
@@ -165,32 +165,46 @@
         </form>
       </div>
 
-      {{-- Right Column: Profile + Password --}}
       <div class="flex_col_layout gap-4">
         <div class="card__dashboard-wrapper">
           <h2 class="label__lg-bold">{{ __('lang.label.update_profile_photo') }}</h2>
           <div class="flex_col_layout items-center">
-            <img src="https://i.redd.it/fcnh4ty49i791.png" alt="{{ $user->name }}" class="profile_photo mb-2">
-            <form action="#"
-              method="POST"
-              class="resume-form fgap-2 mt-2 sm:flex justify-center gap-2"
-              enctype="multipart/form-data"
-            >
-              @csrf
-              @method('PUT')
-              <input
-                type="file"
-                name="profile_picture_path"
-                class="button__light w-full sm:w-auto"
+            <img src="{{ $user->profilePicture ?? Vite::asset('resources/images/default-profile-image.jpeg') }}" alt="{{ $user->name }}" class="profile_photo mb-2">
+            <div class="flex items-center gap-2">
+              <form action="{{ route('user.profile.update.profle-photo') }}"
+                method="POST"
+                class="resume-form fgap-2 mt-2 sm:flex justify-center gap-2"
+                enctype="multipart/form-data"
               >
-              @error('profile_picture_path')
-                <p class="error">{{ $message }}</p>
-              @enderror
+                @csrf
+                @method('PUT')
+                <div class="flex_col_layout">
+                  <input
+                    type="file"
+                    name="profile_picture_path"
+                    class="button__light w-full sm:w-auto"
+                  >
+                  @error('profile_picture_path')
+                    <p class="error">{{ $message }}</p>
+                  @enderror
+                </div>
 
-              <button type="submit" class="button__light w-full sm:w-auto mt-2 sm:mt-0">
-                {{ __('lang.button.upload') }}
-              </button>
-            </form>
+                <div>
+                  <button type="submit" class="button__light w-full sm:w-auto mt-2 sm:mt-0">
+                    {{ __('lang.button.upload') }}
+                  </button>
+                </div>
+              </form>
+              @if ($user->profile_picture_path)
+                <form action="{{ route('user.profile.update.profile-photo-delete') }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="button__light label__sm-semi-bold bg-red-100 w-full sm:w-auto">
+                    {{ __('lang.button.delete') }}
+                  </button>
+                </form>
+              @endif
+            </div>
           </div>
         </div>
 

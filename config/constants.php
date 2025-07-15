@@ -22,13 +22,11 @@ return [
         'max_address_chars' => 255,
         'min_password_chars' => 8,
         'max_username_chars' => 10,
+        'max_image_size' => 10250, // 10 MB
     ],
     'user_register_code_length' => 6,
     'suggested_company_count' => 5,
     'recent_user_application_count' => 5,
-    'file_path' => [
-        'resume' => 'user/resume/',
-    ],
     'pagination' => [
         'default' => 10,
         'jobs' => 10,

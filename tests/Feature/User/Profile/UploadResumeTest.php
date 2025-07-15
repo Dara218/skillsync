@@ -34,6 +34,13 @@ class UploadResumeTest extends TestCase
     protected const GUARD = UserGuard::USER->value;
 
     /**
+     * The resume file path (user/resume/).
+     *
+     * @return string
+     */
+    protected const RESUME_FILE_PATH = config('filesystems.paths.resume');
+
+    /**
      * The fake resume.
      *
      * @var \Illuminate\Http\Testing\File $fakeResume
@@ -69,7 +76,7 @@ class UploadResumeTest extends TestCase
     public function testUserCanUploadResumeSuccessfully(): void
     {
         // Arrange
-        $fakeResumePath = config('constants.file_path.resume') . $this->fakeResume->getClientOriginalName();
+        $fakeResumePath = self::RESUME_FILE_PATH . $this->fakeResume->getClientOriginalName();
 
         // Act
         $this->mock(S3Service::class, function($mock) use ($fakeResumePath) {
@@ -105,7 +112,7 @@ class UploadResumeTest extends TestCase
     public function testUserCanReplaceResumeSuccessfully(): void
     {
         // Arrange
-        $oldResumePath = config('constants.file_path.resume') . $this->fakeResume->getClientOriginalName();
+        $oldResumePath = self::RESUME_FILE_PATH . $this->fakeResume->getClientOriginalName();
         $newResume = UploadedFile::fake()->create('new_resume.pdf', 200, 'application/pdf');
 
         $this->updateUserResumePath($oldResumePath);
@@ -138,7 +145,7 @@ class UploadResumeTest extends TestCase
             ->assertSessionHas('success', __('message.success.resume_uploaded_successfully'));
 
         $this->assertDatabaseHas('users', [
-            'resume_path' => config('constants.file_path.resume') . $newResume->getClientOriginalName(),
+            'resume_path' => self::RESUME_FILE_PATH . $newResume->getClientOriginalName(),
         ]);
     }
 
@@ -150,7 +157,7 @@ class UploadResumeTest extends TestCase
     public function testUserCanDeleteResumeSuccessfully(): void
     {
         // Arrange
-        $fakeResumePath = config('constants.file_path.resume') . $this->fakeResume->getClientOriginalName();
+        $fakeResumePath = self::RESUME_FILE_PATH . $this->fakeResume->getClientOriginalName();
 
         $this->updateUserResumePath($fakeResumePath);
 

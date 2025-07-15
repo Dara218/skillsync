@@ -2,11 +2,11 @@
 
 use App\Http\Controllers\User\{
     Authentication\AuthUserController,
-    Dashboard\ResumeController,
     Dashboard\UserDashboardController,
     Job\JobsController,
     Profile\EmailAddressController,
     Profile\ProfileController,
+    Profile\ResumeController,
     Registration\UserRegistrationController,
     VerifyEmail\UserVerifyController,
 };
@@ -90,6 +90,8 @@ Route::name('user.')->group(function () {
                             Route::put('/{id}', 'update')
                                 ->name('personal-info')
                                 ->where(['id' => '[0-9]+']);
+                            Route::put('/update-profile-photo', 'updateProfilePhoto')->name('profle-photo');
+                            Route::delete('/delete-profile-photo', 'deleteProfilePhoto')->name('profile-photo-delete');
                         });
                 });
                 // Update Email Routes

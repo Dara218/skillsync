@@ -5,6 +5,7 @@ namespace App\Service\User\Dashboard;
 use App\Enums\common\UserGuard;
 use App\Interfaces\User\UserInterface;
 use App\Service\Common\{
+    FileStorageService,
     LogService,
     S3Service,
 };
@@ -14,11 +15,11 @@ use Illuminate\Support\Facades\Auth;
 class ResumeService
 {
     /**
-     * S3Service instance.
+     * FileStorageService instance.
      *
-     * @var \App\Service\Common\S3Service $s3Service
+     * @var \App\Service\Common\FileStorageService $fileStorageService
      */
-    protected S3Service $s3Service;
+    protected FileStorageService $fileStorageService;
 
     /**
      * UserInterface instance.
@@ -33,14 +34,19 @@ class ResumeService
     public const CHANNEL_NAME = 's3';
 
     /**
+     * The resume_path in the user's table.
+     */
+    public const RESUME_PATH = 'resume_path';
+
+    /**
      * Constructor for initializing ResumeController.
      *
      * @param \App\Service\Common\S3Service $s3Service
      */
     public function __construct(S3Service $s3Service)
     {
-        $this->s3Service = $s3Service;
         $this->userInterface = app(UserInterface::class);
+        $this->fileStorageService = app(FileStorageService::class);
     }
 
     /**
@@ -53,22 +59,21 @@ class ResumeService
     public function handleResumeUpload(UploadedFile $resume): void
     {
         try {
-            $systemResumePath = config('constants.file_path.resume');
-            $user = Auth::guard(UserGuard::USER->value)->user();
-            $currentResumePath = $user->resume_path;
+            $systemResumePath = config('filesystems.paths.resume');
 
-            if ($currentResumePath && $this->s3Service->exists($currentResumePath)) {
-                $this->s3Service->delete($currentResumePath);
-            }
+            $user = collect(Auth::guard(UserGuard::USER->value)->user())
+                ->only(['id', 'username', self::RESUME_PATH])
+                ->toArray();
 
-            $resumePath = $systemResumePath . $resume->getClientOriginalName();
-            $resumeFile = file_get_contents($resume->getRealPath());
+            $currentImagePath = $user[self::RESUME_PATH];
 
-            // Upload the resume in s3 folder
-            $this->s3Service->put($resumePath, $resumeFile);
-
-            // Update the users.resume_path in users table
-            $this->updateResumePath($user->id, $resumePath);
+            $this->fileStorageService->upload(
+                $resume,
+                $systemResumePath,
+                $currentImagePath,
+                self::RESUME_PATH,
+                $user,
+            );
         } catch (\Exception $e) {
             LogService::error(
                 'Error uploading the resume.',
@@ -82,22 +87,6 @@ class ResumeService
     }
 
     /**
-     * Update the user's resume path in db (users.resume_path).
-     *
-     * @param integer $userId The user's id (users.id)
-     * @param ?string $resumePath The resume's path (users.resume_path)
-     *
-     * @return void
-     */
-    public function updateResumePath(int $userId, ?string $resumePath): void
-    {
-        $this->userInterface->update(
-            $userId,
-            ['resume_path' => $resumePath],
-        );
-    }
-
-    /**
      * Handles the resume delete.
      *
      * @return void
@@ -108,12 +97,10 @@ class ResumeService
             $user = Auth::guard(UserGuard::USER->value)->user();
             $currentResumePath = $user->resume_path;
 
-            if ($currentResumePath && $this->s3Service->exists($currentResumePath)) {
-                $this->s3Service->delete($currentResumePath);
-            }
-
-            // Update the users.resume_path in users table
-            $this->updateResumePath($user->id, null);
+            $this->fileStorageService->delete(
+                $currentResumePath,
+                self::RESUME_PATH,
+            );
         } catch (\Exception $e) {
             LogService::error(
                 'Error deleting the resume.',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Dashboard;
+namespace App\Http\Controllers\User\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\UploadResumeRequest;
@@ -40,7 +40,9 @@ class ResumeController extends Controller
         DB::beginTransaction();
 
         try {
-            $this->resumeService->handleResumeUpload($request->validated('resume_path'));
+            $this->resumeService->handleResumeUpload(
+                $request->validated('resume_path')
+            );
 
             DB::commit();
 
