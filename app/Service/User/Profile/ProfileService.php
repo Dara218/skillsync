@@ -100,6 +100,7 @@ class ProfileService
             $user = collect(Auth::guard(UserGuard::USER->value)->user())
                 ->only(['id', 'username', self::PROFILE_PICTURE_PATH])
                 ->toArray();
+
             $currentImagePath = $user[self::PROFILE_PICTURE_PATH];
 
             $this->fileStorageService->upload(
