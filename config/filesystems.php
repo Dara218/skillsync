@@ -29,7 +29,6 @@ return [
     */
 
     'disks' => [
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
@@ -55,9 +54,8 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', true),
             'throw' => true,
-            'report' => false,
         ],
 
     ],
@@ -77,4 +75,19 @@ return [
         public_path('storage') => storage_path('app/public'),
     ],
 
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Paths
+    |--------------------------------------------------------------------------
+    |
+    | Here you may configure the custom paths used in your application.
+    | This can be useful for defining paths to be used across your
+    | application that can be managed centrally.
+    |
+    */
+    'paths' => [
+        'resume' => 'user/resume/',
+        'profile_photo' => '/user/images/profile_photo/',
+    ],
 ];
