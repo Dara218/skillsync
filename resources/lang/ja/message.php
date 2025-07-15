@@ -19,6 +19,8 @@ return [
         'profile_updated_sucessfully' => '個人情報は正常に更新されました。',
         'a_link_has_been_sent_to_the_provided_email' => '提供されたEメールにリンクが送信されました。',
         'your_email_address_has_been_updated' => 'メールアドレスが更新されました',
+        'profile_photo_uploaded_successfully' => 'プロフィール写真のアップロードに成功しました。',
+        'profile_photo_deleted_successfully' => 'プロフィール写真の削除に成功しました。',
     ],
 
     'error' => [
