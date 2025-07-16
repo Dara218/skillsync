@@ -45,6 +45,9 @@ return [
         'update_profile_photo' => 'Update Profile Photo',
         'change_password' => 'Change Password',
         'username' => 'Username',
+        'current_password' => 'Current Password',
+        'new_password' => 'New Password',
+        'confirm_password' => 'Confirm Password',
     ],
 
     'button' => [
@@ -87,6 +90,7 @@ return [
         'jobs' => 'Jobs',
         'error' => ':PAGE_TITLE',
         'update_email' => 'Update Email Address',
+        'update_password' => 'Update Password',
     ],
 
     'note' => [
