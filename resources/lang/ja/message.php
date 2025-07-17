@@ -21,6 +21,7 @@ return [
         'your_email_address_has_been_updated' => 'メールアドレスが更新されました',
         'profile_photo_uploaded_successfully' => 'プロフィール写真のアップロードに成功しました。',
         'profile_photo_deleted_successfully' => 'プロフィール写真の削除に成功しました。',
+        'your_password_has_been_updated_successfully' => 'パスワードは正常に更新されました。',
     ],
 
     'error' => [

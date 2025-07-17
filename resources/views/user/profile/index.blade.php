@@ -213,58 +213,12 @@
             <a href="{{ route('user.profile.update.show-update-email') }}" class="button__lg w-full">
               {{ __('lang.button.update_email_address') }}
             </a>
-            <a href="#" class="button__lg w-full">
+            <a href="{{ route('user.update.password.index') }}" class="button__lg w-full">
               {{ __('lang.button.updated_password') }}
             </a>
             <a href="#" class="button__lg w-full text-red-800">
               {{ __('lang.button.delete_account') }}
             </a>
-            {{-- <div>
-              <label for="name" class="label">
-                Current Password
-              </label>
-              <input
-                type="text"
-                name="name"
-                id=""
-                class="input"
-              >
-              @error('')
-                <p class="error">{{ $message }}</p>
-              @enderror
-            </div>
-            <div>
-              <label for="email" class="label">
-                New Password
-              </label>
-              <input
-                type="text"
-                name=""
-                id="email"
-                class="input"
-              >
-              @error('')
-                <p class="error">{{ $message }}</p>
-              @enderror
-            </div>
-            <div>
-              <label for="email" class="label">
-                Confirm Password
-              </label>
-              <input
-                type="text"
-                name=""
-                id="email"
-                class="input"
-              >
-              @error('')
-                <p class="error">{{ $message }}</p>
-              @enderror
-            </div> --}}
-
-            {{-- <button type="submit" class="button__submit">
-              {{ __('lang.button.update') }}
-            </button> --}}
           </div>
         </div>
       </div>

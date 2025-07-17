@@ -21,6 +21,7 @@ return [
         'your_email_address_has_been_updated' => 'Your email address has been updated.',
         'profile_photo_uploaded_successfully' => 'Profile photo uploaded successfully.',
         'profile_photo_deleted_successfully' => 'Profile photo deleted successfully.',
+        'your_password_has_been_updated_successfully' => 'Your password has been updated successfully.',
     ],
 
     'error' => [
