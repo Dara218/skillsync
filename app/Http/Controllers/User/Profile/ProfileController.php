@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User\Profile;
 
-use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\{
     UpdateProfilePhotoRequest,
@@ -14,17 +13,17 @@ use App\Interfaces\{
 };
 use App\Service\Common\LogService;
 use App\Service\User\Profile\ProfileService;
+use App\Traits\HasUserAuthentication;
 use Illuminate\Http\{
     RedirectResponse,
     Request,
 };
-use Illuminate\Support\Facades\{
-    Auth,
-    DB,
-};
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
+    use HasUserAuthentication;
+
     /**
      * JobInterface instance.
      *
@@ -70,7 +69,8 @@ class ProfileController extends Controller
     public function index(Request $request, string $username)
     {
         try {
-            $user = Auth::guard(UserGuard::USER->value)->user();
+            $user = $this->getAuthUser();
+
             $this->authorize('view', [$user, $username]);
 
             return view('user.profile.index', compact('user', 'username'));
@@ -106,7 +106,7 @@ class ProfileController extends Controller
 
         try {
             $isUpdated = $this->profileService
-                ->updateProfile($request->validated(), $id);
+                ->updateProfile($id, $request->validated());
 
             if (!$isUpdated) {
                 DB::rollBack();

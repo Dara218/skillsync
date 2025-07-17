@@ -2,14 +2,15 @@
 
 namespace App\Service\Common;
 
-use App\Enums\common\UserGuard;
 use App\Interfaces\User\UserInterface;
 use App\Service\Common\S3Service;
+use App\Traits\HasUserAuthentication;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class FileStorageService
 {
+    use HasUserAuthentication;
+
     /**
      * UserInterface instance.
      *
@@ -111,7 +112,7 @@ class FileStorageService
      */
     public function delete(string $userFilePath, string $column): void
     {
-        $user = Auth::guard(UserGuard::USER->value)->user();
+        $user = $this->getAuthUser();
 
         if ($userFilePath && $this->s3Service->exists($userFilePath)) {
             $this->s3Service->delete($userFilePath);

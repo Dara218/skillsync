@@ -2,18 +2,19 @@
 
 namespace App\Service\User\Dashboard;
 
-use App\Enums\common\UserGuard;
 use App\Interfaces\User\UserInterface;
 use App\Service\Common\{
     FileStorageService,
     LogService,
     S3Service,
 };
+use App\Traits\HasUserAuthentication;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class ResumeService
 {
+    use HasUserAuthentication;
+
     /**
      * FileStorageService instance.
      *
@@ -61,9 +62,11 @@ class ResumeService
         try {
             $systemResumePath = config('filesystems.paths.resume');
 
-            $user = collect(Auth::guard(UserGuard::USER->value)->user())
-                ->only(['id', 'username', self::RESUME_PATH])
-                ->toArray();
+            $user = $this->getAuthUserAsCollection([
+                'id',
+                'username',
+                self::RESUME_PATH,
+            ])->toArray();
 
             $currentImagePath = $user[self::RESUME_PATH];
 
@@ -94,7 +97,7 @@ class ResumeService
     public function handleResumeDelete(): void
     {
         try {
-            $user = Auth::guard(UserGuard::USER->value)->user();
+            $user = $this->getAuthUser();
             $currentResumePath = $user->resume_path;
 
             $this->fileStorageService->delete(
