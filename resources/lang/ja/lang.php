@@ -46,6 +46,9 @@ return [
         'update_profile_photo' => 'プロフィール写真の更新',
         'change_password' => 'パスワードを変更する',
         'username' => 'ユーザー名',
+        'current_password' => '現在のパスワード',
+        'new_password' => '新しいパスワード',
+        'confirm_password' => 'パスワードの確認',
     ],
 
     'button' => [
@@ -87,6 +90,7 @@ return [
         'jobs' => '求人',
         'error' => ':PAGE_TITLE',
         'update_email' => 'メールアドレスの更新',
+        'update_password' => 'パスワードの更新',
     ],
 
     'note' => [

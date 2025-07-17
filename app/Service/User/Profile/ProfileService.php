@@ -2,7 +2,6 @@
 
 namespace App\Service\User\Profile;
 
-use App\Enums\common\UserGuard;
 use App\Interfaces\User\{
     UserInterface,
     UserRegisterCodeInterface,
@@ -11,11 +10,13 @@ use App\Service\Common\{
     FileStorageService,
     LogService,
 };
+use App\Traits\HasUserAuthentication;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Auth;
 
 class ProfileService
 {
+    use HasUserAuthentication;
+
     /**
      * UserInterface instance.
      *
@@ -61,12 +62,12 @@ class ProfileService
     /**
      * Handle user profile update.
      *
-     * @param array $data The personal details of the user
      * @param int $id The user's id (users.id)
+     * @param array $data The personal details of the user
      *
      * @return bool
      */
-    public function updateProfile(array $data, int $id): bool
+    public function updateProfile(int $id, array $data): bool
     {
         try {
             $this->userInterface->update($id, $data);
@@ -97,9 +98,12 @@ class ProfileService
         try {
             $systemUserImagePath = config('filesystems.paths.profile_photo');
 
-            $user = collect(Auth::guard(UserGuard::USER->value)->user())
-                ->only(['id', 'username', self::PROFILE_PICTURE_PATH])
-                ->toArray();
+            $user = $this->getAuthUserAsCollection([
+                'id',
+                'username',
+                self::PROFILE_PICTURE_PATH,
+            ])->toArray();
+
             $currentImagePath = $user[self::PROFILE_PICTURE_PATH];
 
             $this->fileStorageService->upload(
@@ -129,7 +133,7 @@ class ProfileService
     public function handleProfilePhotoDelete(): void
     {
         try {
-            $user = Auth::guard(UserGuard::USER->value)->user();
+            $user = $this->getAuthUser();
             $profilePhotoPath = $user->profile_picture_path;
 
             $this->fileStorageService->delete(

@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\User\Dashboard;
 
-use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
 use App\Interfaces\{
     Application\ApplicationInterface,
     Job\JobInterface,
 };
 use App\Service\Common\LogService;
-use Illuminate\Support\Facades\Auth;
+use App\Traits\HasUserAuthentication;
 
 class UserDashboardController extends Controller
 {
+    use HasUserAuthentication;
+
     /**
      * JobInterface instance.
      *
@@ -51,7 +52,7 @@ class UserDashboardController extends Controller
     public function index()
     {
         try {
-            $user = Auth::guard(UserGuard::USER->value)->user();
+            $user = $this->getAuthUser();
 
             $suggestedJobs = $this->jobInterface->getSuggestedJobs();
             $recentApplications = $this->applicationInterface->getRecent($user->id);

@@ -49,6 +49,10 @@ return [
         'invalid_credentials' => 'Invalid credentials.',
         'old_verification_code' => 'Entered an old verification code.',
         'old_and_expired_verification_code' => 'Entered an old and expired verification code.',
+        'password' => [
+            'incorrect' => 'The password is incorrect.',
+            'not_match' => 'The new and confirm password does not match.',
+        ],
     ],
 
     /*
@@ -68,5 +72,7 @@ return [
         'tel' => 'Contact Number',
         'username' => 'Username',
         'profile_picture_path' => 'Profile Picture',
+        'current_password' => 'Current password',
+        'password_confirmation' => 'Password confirmation',
     ],
 ];

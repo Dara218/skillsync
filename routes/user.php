@@ -10,6 +10,7 @@ use App\Http\Controllers\User\{
     Registration\UserRegistrationController,
     VerifyEmail\UserVerifyController,
 };
+use App\Http\Controllers\User\Profile\UpdatePasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::name('user.')->group(function () {
@@ -105,6 +106,15 @@ Route::name('user.')->group(function () {
                                 Route::get('/update-email-process', 'updateEmailAddress')->name('email');
                             });
                     });
+            });
+
+        // Update Password Routes
+        Route::controller(UpdatePasswordController::class)
+            ->prefix('/update-password')
+            ->name('update.password.')
+            ->group(function() {
+                Route::get('/', 'index')->name('index');
+                Route::put('/', 'update')->name('update');
             });
     });
 });

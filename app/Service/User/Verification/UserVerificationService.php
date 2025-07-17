@@ -2,7 +2,6 @@
 
 namespace App\Service\User\Verification;
 
-use App\Enums\common\UserGuard;
 use App\Exceptions\{
     CodeLatestException,
     CodeExpiredException,
@@ -16,14 +15,14 @@ use App\Service\Common\{
     LogService,
     VerificationCodeService,
 };
+use App\Traits\HasUserAuthentication;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\{
-    Auth,
-    Mail,
-};
+use Illuminate\Support\Facades\Mail;
 
 class UserVerificationService
 {
+    use HasUserAuthentication;
+
     /**
      * UserRegisterCodeInterface instance.
      *
@@ -181,7 +180,7 @@ class UserVerificationService
     private function updateEmailVerifiedAt(): void
     {
         $this->userInterface->update(
-            Auth::guard(UserGuard::USER->value)->user()->id,
+            $this->getAuthUser()->id,
             ['email_verified_at' => now()],
         );
     }

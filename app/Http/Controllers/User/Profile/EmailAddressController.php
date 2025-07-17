@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\User\Profile;
 
-use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateEmailRequest;
 use App\Interfaces\{
@@ -11,18 +10,18 @@ use App\Interfaces\{
 };
 use App\Service\Common\LogService;
 use App\Service\User\Profile\EmailAddressService;
+use App\Traits\HasUserAuthentication;
 use Illuminate\Http\{
     RedirectResponse,
     Request,
 };
-use Illuminate\Support\Facades\{
-    Auth,
-    DB,
-};
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
 class EmailAddressController extends Controller
 {
+    use HasUserAuthentication;
+
     /**
      * JobInterface instance.
      *
@@ -125,8 +124,7 @@ class EmailAddressController extends Controller
      */
     public function updateEmailAddress(Request $request): RedirectResponse
     {
-        $user = collect(Auth::guard(UserGuard::USER->value)->user())
-            ->only(['id', 'email']);
+        $user = $this->getAuthUserAsCollection(['id', 'email']);
 
         // Abort if the verification link is reused or invalid
         abort_if($user['email'] === $request->new_email, Response::HTTP_NOT_FOUND);

@@ -2,21 +2,22 @@
 
 namespace App\Service\User\Profile;
 
-use App\Enums\common\UserGuard;
 use App\Interfaces\User\{
     UserInterface,
     UserRegisterCodeInterface,
 };
 use App\Mail\UpdateEmailMail;
 use App\Service\Common\LogService;
+use App\Traits\HasUserAuthentication;
 use Illuminate\Support\Facades\{
-    Auth,
     Mail,
     URL,
 };
 
 class EmailAddressService
 {
+    use HasUserAuthentication;
+
     /**
      * UserInterface instance.
      *
@@ -51,8 +52,7 @@ class EmailAddressService
     public function handleSendEmailAddressLink(string $newEmailAddress): bool
     {
         try {
-            $user = collect(Auth::guard(UserGuard::USER->value)->user())
-                ->only(['name', 'email']);
+            $user = $this->getAuthUserAsCollection(['name', 'email']);
 
             // Generate a signed route with expiration
             $url = $this->generateSignedEmailUpdateUrl($user['email'], $newEmailAddress);
@@ -134,7 +134,7 @@ class EmailAddressService
     public function handleUpdateEmailAddress(string $newEmailAddress, string $userId): void
     {
         try {
-            $userId = Auth::guard(UserGuard::USER->value)->user()->id;
+            $userId = $this->getAuthUser()->id;
 
             // Update email in users.email
             $this->userInterface->update($userId, [

@@ -52,6 +52,10 @@ return [
         'invalid_credentials' => '認証情報が無効です。',
         'old_verification_code' => '古い認証コードを入力しました。',
         'old_and_expired_verification_code' => '有効期限が切れた古い認証コードを入力しました。',
+        'password' => [
+            'incorrect' => 'パスワードが間違っています。',
+            'not_match' => '新しいパスワードと確認用パスワードが一致しません。',
+        ],
     ],
 
     /*
@@ -72,5 +76,7 @@ return [
         'tel' => '連絡先',
         'username' => 'ユーザー名',
         'profile_picture_path' => 'プロフィール写真',
+        'current_password' => '現在のパスワード',
+        'password_confirmation' => 'パスワードの確認',
     ],
 ];
