@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         require_once app_path('Helpers/PaginationRedirectionHelper.php');
         require_once app_path('Helpers/FileNameFormatHelper.php');
+        require_once app_path('Helpers/AuthHelper.php');
     }
 
     /**
