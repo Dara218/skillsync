@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\User\Registration;
 
+use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserRegisterRequest;
-use App\Service\Common\LogService;
-use App\Service\User\{
-    Authentication\AuthUserService,
-    Registration\UserRegisterService,
+use App\Service\Common\{
+    AuthService,
+    LogService,
 };
+use App\Service\User\Registration\UserRegisterService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
@@ -25,9 +26,9 @@ class UserRegistrationController extends Controller
     /**
      * AuthUserService instance.
      *
-     * @var \App\Service\User\Authentication\AuthUserService $authUserService
+     * @var \App\Service\Common\AuthService $authService
      */
-    protected AuthUserService $authUserService;
+    protected AuthService $authService;
 
     /**
      * Constructor for initializing UserRegistrationController.
@@ -37,7 +38,7 @@ class UserRegistrationController extends Controller
     public function __construct(UserRegisterService $userRegisterService)
     {
         $this->userRegisterService = $userRegisterService;
-        $this->authUserService = app(AuthUserService::class);
+        $this->authService = app(AuthService::class);
     }
 
     /**
@@ -65,8 +66,11 @@ class UserRegistrationController extends Controller
             $this->userRegisterService
                 ->handleRegistration($request->validated());
 
-            $this->authUserService->handleLogin(
-                $request->only('email', 'password')
+            $guard = UserGuard::USER->value;
+
+            $this->authService->handleLogin(
+                $request->only('email', 'password'),
+                $guard,
             );
 
             DB::commit();

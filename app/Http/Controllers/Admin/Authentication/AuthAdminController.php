@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\User\Authentication;
+namespace App\Http\Controllers\Admin\Authentication;
 
 use App\Enums\common\UserGuard;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserLoginRequest;
+use App\Http\Requests\Admin\AdminLoginRequest;
 use App\Service\Common\{
     AuthService,
     LogoutService,
     LogService,
 };
-use Illuminate\Http\{
-    RedirectResponse,
-    Request,
-};
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class AuthUserController extends Controller
+class AuthAdminController extends Controller
 {
     /**
      * AuthService instance.
@@ -47,23 +45,23 @@ class AuthUserController extends Controller
     }
 
     /**
-     * View Login user page.
+     * View Login admin page.
      *
      * @return \Illuminate\View\View
      */
     public function index(): View
     {
-        return view('user.auth.login');
+        return view('admin.auth.index');
     }
 
     /**
      * Process user login process.
      *
-     * @param \App\Http\Requests\User\UserLoginRequest $request
+     * @param \App\Http\Requests\Admin\AdminLoginRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse|void
      */
-    public function authenticate(UserLoginRequest $request): RedirectResponse
+    public function authenticate(AdminLoginRequest $request): RedirectResponse
     {
         try {
             $guard = UserGuard::ADMIN->value;
@@ -77,13 +75,13 @@ class AuthUserController extends Controller
                     ->withErrors(['error' => __('validation.custom.invalid_credentials')]);
             }
 
-            return redirect()->route('user.dashboard');
+            return redirect()->route('admin.dashboard');
         } catch (\Exception $e) {
             LogService::error(
-                'Error processing user authentication.',
+                'Error showing admin login.',
                 [
                     'error' => $e->getMessage(),
-                    'trace' => $e->getTraceAsString(),
+                    'trace' => $e->getTrace(),
                 ],
             );
 
@@ -92,7 +90,7 @@ class AuthUserController extends Controller
     }
 
     /**
-     * Process user logout.
+     * Process admin logout.
      *
      * @param \Illuminate\Http\Request $request
      *
@@ -101,14 +99,14 @@ class AuthUserController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         try {
-            $guard = UserGuard::USER->value;
+            $guard = UserGuard::ADMIN->value;
 
             $this->logoutService->handleLogout($request, $guard);
 
-            return redirect()->route('user.login.index');
+            return redirect()->route('admin.login.index');
         } catch (\Exception $e) {
             LogService::error(
-                'Error processing user logout.',
+                'Error processing admin logout.',
                 [
                     'error' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
@@ -116,7 +114,7 @@ class AuthUserController extends Controller
             );
 
             return redirect()
-                ->route('user.login.index')
+                ->route('admin.login.index')
                 ->with('error', __('message.error.failed_handling_the_process'));
         }
     }

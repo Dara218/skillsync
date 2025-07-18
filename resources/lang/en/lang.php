@@ -91,6 +91,7 @@ return [
         'error' => ':PAGE_TITLE',
         'update_email' => 'Update Email Address',
         'update_password' => 'Update Password',
+        'admin_login' => 'Admin Login',
     ],
 
     'note' => [

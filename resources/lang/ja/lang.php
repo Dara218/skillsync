@@ -91,6 +91,7 @@ return [
         'error' => ':PAGE_TITLE',
         'update_email' => 'メールアドレスの更新',
         'update_password' => 'パスワードの更新',
+        'admin_login' => '管理者ログイン',
     ],
 
     'note' => [

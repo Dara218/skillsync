@@ -27,7 +27,7 @@ class UpdateEmailRequest extends FormRequest
         return [
             'email' => [
                 'required',
-                'email',
+                'email:rfc,dns',
                 Rule::unique('users')->whereNull('deleted_at')->ignore($userId),
                 'max:' . config('constants.validation.max_email_address_chars'),
             ],

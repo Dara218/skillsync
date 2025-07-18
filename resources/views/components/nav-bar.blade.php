@@ -1,5 +1,6 @@
 @php
   $user = Auth::guard(App\Enums\common\UserGuard::USER->value)->user();
+  $isUserLoggedIn = $user?->user_role === App\Enums\common\UserGuard::USER->value;
 @endphp
 
 <header class="navbar__container">
@@ -24,7 +25,8 @@
     {{-- Nav Links --}}
     <nav id="navMenu" class="navbar-navMenu hidden md:block">
       <ul class="navbar-navMenu__wrapper">
-        @if ($user->email_verified_at)
+        {{-- User Nav Bar --}}
+        @if ($user?->email_verified_at && $isUserLoggedIn)
           <li class="@if(Route::is('user.jobs.index')) button__active @endif">
             <a href="{{ route('user.jobs.index') }}" class="navbar-navMenu__item">
               <i class="fas fa-briefcase"></i> 
@@ -54,8 +56,27 @@
           </li>
         @endif
 
+        {{-- Admin Nav Bar --}}
+        <li>
+          <a href="#" class="navbar-navMenu__item">
+            Link 1
+          </a>
+        </li>
+        
+        <li>
+          <a href="#" class="navbar-navMenu__item">
+            Link 2
+          </a>
+        </li>
+        
+        <li>
+          <a href="#" class="navbar-navMenu__item">
+            Link 3
+          </a>
+        </li>
+
         <li class="md:border-l md:border-gray-200 md:pl-4 md:ml-2">
-          <form action="{{ route('user.logout') }}" method="POST">
+          <form action="{{ $isUserLoggedIn ? route('user.logout') : route('admin.logout') }}" method="POST">
             @csrf
             <button type="submit" class="navbar-navMenu__item__logout">
               <i class="fas fa-sign-out-alt"></i> 
