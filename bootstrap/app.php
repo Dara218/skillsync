@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\{
+    AdminAccess,
     RedirectIfAuthenticated,
     UserAccess,
 };
@@ -21,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'guest' => RedirectIfAuthenticated::class,
             'user' => UserAccess::class,
+            'admin' => AdminAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
