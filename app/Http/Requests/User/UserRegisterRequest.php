@@ -32,7 +32,7 @@ class UserRegisterRequest extends FormRequest
             ],
             'email' => [
                 'required',
-                'email',
+                'email:rfc,dns',
                 Rule::unique('users')->whereNull('deleted_at'),
                 'max:' . config('constants.validation.max_email_address_chars'),
             ],
