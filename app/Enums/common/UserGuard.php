@@ -15,5 +15,5 @@ enum UserGuard: string
     /**
      * Admin guard;
      */
-    case ADMIN = 'ADMIN';
+    case ADMIN = 'admin';
 }

@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             $route = match ($guard) {
-                UserGuard::ADMIN->value => route('test'), // Todo: Change this
+                UserGuard::ADMIN->value => $route = route('admin.dashboard'),
                 UserGuard::USER->value => $route = route('user.dashboard'),
                 default => $route = route('user.dashboard'),
             };
