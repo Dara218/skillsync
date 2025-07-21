@@ -3,6 +3,7 @@
 namespace App\Service\Common;
 
 use App\Enums\common\UserGuard;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService
@@ -19,6 +20,13 @@ class AuthService
     {
         if (!Auth::guard($guard)->attempt($data)) {
             return false;
+        }
+
+        // Update last login timestamp for user guard
+        if ($guard === UserGuard::USER->value) {
+            /** @var User $user */
+            $user = Auth::guard($guard)->user();
+            $user?->updateLastLogin();
         }
 
         return true;

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\TracksLastLogin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,6 +16,7 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
     use SoftDeletes;
+    use TracksLastLogin;
 
     /**
      * The table associated with the model.
@@ -40,6 +42,7 @@ class User extends Authenticatable
         'profile_picture_path',
         'address',
         'email_verified_at',
+        'last_login',
     ];
 
     /**
@@ -62,6 +65,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'birth_date' => 'date',
+            'last_login' => 'datetime',
         ];
     }
 
