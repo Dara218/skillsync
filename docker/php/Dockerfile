@@ -42,7 +42,7 @@ RUN apt update \
 && composer config -g repos.packagist composer https://packagist.org
 
 # Install nodejs and npm
-RUN apt update && apt -y install nodejs npm
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \ && apt install -y nodejs
 
 # Create a directory for the app
 RUN mkdir -p /var/www/laravel-test-app
